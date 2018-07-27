@@ -16,10 +16,25 @@
     <Filter Include="Source Files\#2">
       <UniqueIdentifier>{19fa42f5-1939-4245-a410-105823dcdb6c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\#3">
+      <UniqueIdentifier>{913da921-1d2d-470a-8297-00633b7078bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\#4 배열과 포인터">
+      <UniqueIdentifier>{a2280338-2972-4f48-8434-09d461b175b7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="형변환_우선순위.c">
       <Filter>Source Files\#2</Filter>
+    </ClCompile>
+    <ClCompile Include="함수와 범위.c">
+      <Filter>Source Files\#3</Filter>
+    </ClCompile>
+    <ClCompile Include="array.c">
+      <Filter>Source Files\#4 배열과 포인터</Filter>
+    </ClCompile>
+    <ClCompile Include="pointer.c">
+      <Filter>Source Files\#4 배열과 포인터</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
