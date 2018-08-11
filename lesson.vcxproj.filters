@@ -22,6 +22,12 @@
     <Filter Include="Source Files\#4 배열과 포인터">
       <UniqueIdentifier>{a2280338-2972-4f48-8434-09d461b175b7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\#5 포인터와 응용">
+      <UniqueIdentifier>{cff07ad1-5241-4bd0-8ee4-004b4ec955b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\#6 문자열">
+      <UniqueIdentifier>{f3d6c59d-c9a7-4875-a31d-518a9744641b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="형변환_우선순위.c">
@@ -35,6 +41,12 @@
     </ClCompile>
     <ClCompile Include="pointer.c">
       <Filter>Source Files\#4 배열과 포인터</Filter>
+    </ClCompile>
+    <ClCompile Include="pointer2.cpp">
+      <Filter>Source Files\#5 포인터와 응용</Filter>
+    </ClCompile>
+    <ClCompile Include="string.c">
+      <Filter>Source Files\#6 문자열</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
