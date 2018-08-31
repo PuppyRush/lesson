@@ -1,6 +1,14 @@
 //#include <stdio.h>
 //#include <memory>
 //
+//#define ARY1 100
+//#define ARY2 100
+//
+//int function(double a)
+//{
+//	return 1;
+//}
+//
 //void set(int ary[10])
 //{
 //
@@ -13,19 +21,19 @@
 //
 //int main()
 //{
-//	int integerArray[10];
-//	int *ptr = integerArray;
+//	int integerarray[10];
+//	int *ptr = integerarray;
 //
 //	printf("%d\n", sizeof(ptr));
 //
 //	for (int i = 0; i < 10; i++)
-//		integerArray[i] = i;
+//		integerarray[i] = i;
 //
 //	for (int i = 0; i < 10; i++)
 //		printf("%d, %p\n", *(ptr + i), ptr + i);
 //
-//	//integerArray++;
-//	ptr = integerArray;
+//	//integerarray++;
+//	ptr = integerarray;
 //
 //	//for (int i = 0; i < 10; i++)
 //	//{
@@ -37,8 +45,8 @@
 //	printf("%p %p\n", ptr2, &ptr);
 //
 //	//memset
-//	int ary2[10][10];
-//	memset(ary2, 1, sizeof(int) * 10 * 10);
+//	int ary2[ARY1][ARY2];
+//	memset(ary2, 1, sizeof(int) * ARY1 * ARY2);
 //
 //	int number = 100;
 //	for (int i = 0; i < 10; i++)
@@ -49,7 +57,7 @@
 //	printf("%d %p", *aryptr, aryptr + 3);
 //
 //
-//	ptr = integerArray;
+//	ptr = integerarray;
 //
 //	int value = *ptr++;
 //	value = (*ptr)++;
@@ -64,7 +72,7 @@
 //
 //	//malloc
 //	int *heap = (int *)malloc(sizeof(int) * 100);
-//	heap[2] = 3;
+//	//heap[2] = 3;
 //
 //	for (int i = 10; i < 20; i++)
 //		*(heap+i) = i;
@@ -74,8 +82,11 @@
 //
 //	free(heap);
 //
+//	int(*funptr)(double a) = function;
+//
+//	sizeof(double*);
+//
 //	
 //
-//
-//	//heap, stack, Code, Data
+//	//heap, stack, code, data
 //}

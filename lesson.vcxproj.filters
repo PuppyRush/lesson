@@ -28,6 +28,9 @@
     <Filter Include="Source Files\#6 문자열">
       <UniqueIdentifier>{f3d6c59d-c9a7-4875-a31d-518a9744641b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\#7 구조체">
+      <UniqueIdentifier>{c23460b4-d4c3-477a-a413-22d40ce96dc9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="형변환_우선순위.c">
@@ -47,6 +50,9 @@
     </ClCompile>
     <ClCompile Include="string.c">
       <Filter>Source Files\#6 문자열</Filter>
+    </ClCompile>
+    <ClCompile Include="struct.c">
+      <Filter>Source Files\#7 구조체</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

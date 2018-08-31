@@ -119,6 +119,7 @@
     <ClCompile Include="pointer.c" />
     <ClCompile Include="pointer2.cpp" />
     <ClCompile Include="string.c" />
+    <ClCompile Include="struct.c" />
     <ClCompile Include="함수와 범위.c" />
     <ClCompile Include="형변환_우선순위.c" />
   </ItemGroup>
