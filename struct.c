@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#pragma pack(1)
+//#pragma pack(1)
 
 typedef struct 
 {
@@ -34,6 +34,7 @@ enum Major
 
 int main()
 {
+	//void*
 
 	//구조체 선언
 	
@@ -46,6 +47,8 @@ int main()
 	//구조체와 포인터
 
 	//구조체와 크기
+
+	//enum
 
 	student s;
 	printf("%d\n", sizeof(s));
