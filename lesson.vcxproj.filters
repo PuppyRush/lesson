@@ -54,5 +54,8 @@
     <ClCompile Include="struct.c">
       <Filter>Source Files\#7 구조체</Filter>
     </ClCompile>
+    <ClCompile Include="비트연산.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
