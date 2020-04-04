@@ -57,5 +57,14 @@
     <ClCompile Include="비트연산.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="조건문.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="조건문_스위치.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="반복문.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
