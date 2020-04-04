@@ -1,17 +1,8 @@
 #include <stdio.h>
 
-//#pragma pack(1)
+#pragma pack(2)
 
-typedef struct 
-{
-	int age;
-	int gredee;
-	//char name[13];
-	//major
-
-}student;
-
-enum Month
+typedef enum Month
 {
 	Jaunary,
 	Februray,
@@ -21,7 +12,7 @@ enum Month
 	June,
 	July,
 	Agust
-};
+}Month;
 
 enum Major
 {
@@ -31,6 +22,15 @@ enum Major
 	History,
 	Economy
 };
+
+typedef struct 
+{
+	int age;
+	int gredee;
+	char name[13];
+	Month month;
+
+}student;
 
 int main()
 {
