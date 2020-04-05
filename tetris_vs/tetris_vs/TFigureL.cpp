@@ -3,7 +3,7 @@
 
 using namespace tetris;
 
-TFigureL::TFigureL(const TFigureBuilder *bld)
+TFigureL::TFigureL( TFigureBuilder *bld)
     : TFigure(bld) {
     _rotateLeft();
 }
@@ -58,14 +58,14 @@ bool TFigureL::_validation() {
     return false;
 }
 
-const TFigureType TFigureL::getTypeBegin() const {
+ TFigureType TFigureL::getTypeBegin()  {
     return TFigureType::A;
 }
 
-const TFigureType TFigureL::getTypeEnd() const {
+ TFigureType TFigureL::getTypeEnd()  {
     return TFigureType::D;
 }
 
-const std::shared_ptr<TFigure> TFigureL::_copy() const {
-    return std::shared_ptr<TFigureL>(new TFigureL());
+TFigure* TFigureL::_copy() {
+    return new TFigureL();
 }

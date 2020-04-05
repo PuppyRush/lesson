@@ -11,13 +11,12 @@
 #include <memory>
 
 #include "TType.h"
-#include "RandomGenerator.h"
 
 namespace tetris
 {
 
 template<class T>
-constexpr const auto toUType(T enuml) noexcept
+constexpr  auto toUType(T enuml) noexcept
 {
     return static_cast<std::underlying_type_t<T>>(enuml);
 }
@@ -31,13 +30,13 @@ struct EnumIterator
         :value(T::Begin)
     {}
     
-    inline const T begin() noexcept
+    T begin() noexcept
     {
         value = static_cast<T>( toUType(value) << 1);
         return value;
     }
     
-    inline const bool end() const noexcept
+    bool end()  noexcept
     {
         return toUType(value) != toUType(T::End);
     }
@@ -48,7 +47,7 @@ struct EnumIterator
         return *this;
     }
     
-    bool operator!=(const EnumIterator *other)
+    bool operator!=( EnumIterator *other)
     {
         return toUType(value) != toUType(other->value);
     }
@@ -59,13 +58,13 @@ class EnumHelper
 {
 public:
 
-    static CE const T getRandomly()
+    static T getRandomly()
     {
-        CE const auto rnd = rand()%(toUType(T::End)-toUType(T::Begin)+1);
+        auto rnd = rand()%(toUType(T::End)-toUType(T::Begin)+1);
         return T(rnd);
     }
     
-    static const T getRandomly(const T begin, const T end)
+    static  T getRandomly( T begin,  T end)
     {
         std::default_random_engine generator;
         std::uniform_int_distribution<int> distribution(toUType(begin), toUType(end));

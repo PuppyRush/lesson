@@ -7,7 +7,7 @@ using namespace tetris;
 TFigure::TFigure()
 {}
 
-TFigure::TFigure(const TFigureBuilder* bld)
+TFigure::TFigure( TFigureBuilder* bld)
    : m_width(bld->getWidth()),
     m_height(bld->getHeight()),
     m_figureType(bld->getType ()),
@@ -25,41 +25,41 @@ TFigure::~TFigure()
 {
 }
 
-std::shared_ptr<TFigure> TFigure::goRight()
+TFigure* TFigure::goRight()
 {
     auto copied = copy();
     _goRight ();
     return copied;
 }
-std::shared_ptr<TFigure> TFigure::goLeft()
+TFigure* TFigure::goLeft()
 {
     auto copied = copy();
     _goLeft ();
     return copied;
 }
 
-std::shared_ptr<TFigure> TFigure::goDown()
+TFigure* TFigure::goDown()
 {
     auto copied = copy();
     _goDown ();
     return copied;
 }
 
-std::shared_ptr<TFigure> TFigure::rotateLeft()
+TFigure* TFigure::rotateLeft()
 {
     auto copied = copy();
     _rotateLeft ();
     return copied;
 }
 
-std::shared_ptr<TFigure> TFigure::rotateRight()
+TFigure* TFigure::rotateRight()
 {
     auto copied = copy();
     _rotateRight ();
     return copied;
 }
 
-const std::shared_ptr<TFigure> TFigure::copy() const
+TFigure* TFigure::copy() 
 {
     auto copied = _copy();
     copied->m_point = this->m_point;
@@ -107,6 +107,6 @@ void TFigure::_goDown ()
     m_point.y +=1;
 }
 
-const TFigureType TFigure::getRandomlyFigureType() const {
+ TFigureType TFigure::getRandomlyFigureType() {
     return EnumHelper<TFigureType>::getRandomly(getTypeBegin(), getTypeEnd());
 }

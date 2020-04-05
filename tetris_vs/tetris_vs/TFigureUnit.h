@@ -14,21 +14,21 @@ public:
     };
     
     TFigureUnit();
-    TFigureUnit(const TPoint point, const t_age age, const TColor color, const UnitType type);
+    TFigureUnit( TPoint point,  t_age age,  TColor color,  UnitType type);
     ~TFigureUnit();
     
-    bool operator!=(const TFigureUnit& unit);
+    bool operator!=( TFigureUnit& unit);
     
-    const TPoint getPoint () const;
-    void setPoint (const TPoint &m_point);
+     TPoint getPoint () ;
+    void setPoint ( TPoint m_point);
     
-    const t_age getAge () const;
+     t_age getAge () ;
     void setAge (t_age m_age);
     
-    const TColor getColor () const;
+     TColor getColor () ;
     void setColor (TColor m_color);
     
-    UnitType getType () const;
+    UnitType getType () ;
     void setType (UnitType m_type);
     
     static TFigureUnit& getDefaultUnit()

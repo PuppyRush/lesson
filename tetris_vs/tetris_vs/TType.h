@@ -13,7 +13,7 @@ namespace tetris {
 		TPoint()
 				: x(0), y(0),z(0) {}
 
-		TPoint(const t_coord x, const t_coord y, const t_coord z=0)
+		TPoint( t_coord x,  t_coord y,  t_coord z=0)
 				: x(x), y(y),z(z)
 			{}
 
@@ -57,11 +57,6 @@ namespace tetris {
 		None,
 		Begin = A,
 		End = D
-	};
-	
-	enum class MapType : t_type
-	{
-	
 	};
 	
 }

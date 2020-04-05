@@ -27,23 +27,23 @@ public:
 
     virtual ~TFigureO();
     virtual void initialize() override;
-    virtual const TFigureType getTypeBegin() const override;
-    virtual const TFigureType getTypeEnd() const override;
+    virtual  TFigureType getTypeBegin()  override;
+    virtual  TFigureType getTypeEnd()  override;
 
 
     //hide base ctr, make object from builder
-    static std::shared_ptr<TFigureO> get(const TFigureBuilder *bld)
+    static TFigureO* get( TFigureBuilder *bld)
     {
-        auto figure =  std::shared_ptr<TFigureO>(new TFigureO(bld));
+        auto figure =  new TFigureO(bld);
         figure->initialize ();
         return figure;
     }
 
 private:
     TFigureO(){}
-    TFigureO(const TFigureBuilder *bld);
+    TFigureO( TFigureBuilder *bld);
     virtual bool _validation() override;
-    virtual const std::shared_ptr<TFigure> _copy() const override;
+    virtual TFigure* _copy() override;
     virtual void _rotateLeft() override;
     virtual void _rotateRight() override;
 };

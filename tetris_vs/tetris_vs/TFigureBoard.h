@@ -22,7 +22,7 @@ public:
 
     using BoardType = std::array< std::array<TFigureUnit,BOARD_WIDTH_COUNT>,BOARD_HEIGHT_COUNT >;
     
-    BoardType getBoard() const
+    BoardType getBoard() 
     {return m_board;}
 
     void rotate();
@@ -30,25 +30,25 @@ public:
     void goLeft();
     void goRight();
     void goStraightDown();
-    void eraseLine(const t_size lineNumber);
-    void addLine(const t_size lineNumber);
-    void eraseBottomLine(const t_size = 1);
-    void addBottomLine(const t_size = 1);
+    void eraseLine( t_size lineNumber);
+    void addLine( t_size lineNumber);
+    void eraseBottomLine( t_size = 1);
+    void addBottomLine( t_size = 1);
     void createNextFigureRandomly();
-    std::shared_ptr<TFigure> getCurrentFigure();
+    TFigure* getCurrentFigure();
     
-    static std::shared_ptr<TFigureBoard> get();
+    static TFigureBoard* get();
 
 private:
 
     TFigureBoard();
+    ~TFigureBoard() { delete TFigureBoard::get(); }
     void eraseCoords();
     void setCoords();
     bool eraseLineIfFillLinesAndThenCollapse();
-    void collapseFigures();
-    const bool isValidation(const TFigure* destFigure);
+    bool isValidation( TFigure* destFigure);
     
-    std::shared_ptr<TFigure> m_currentFigure;
+    TFigure* m_currentFigure;
     BoardType m_board;
     std::mutex m_mutex;
 };

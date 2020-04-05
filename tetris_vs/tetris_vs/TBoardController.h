@@ -16,37 +16,40 @@ namespace tetris
 class BoardController {
 
 public:
-    ~BoardController(){}
+    ~BoardController()
+    {
+        delete BoardController::get();
+    }
     
-    inline void rotate() const
+     void rotate() 
     { m_board->rotate ();}
 
-    inline void goStraightDown() const
+     void goStraightDown() 
     { m_board->goStraightDown ();}
 
-    inline void goDown() const
+     void goDown() 
     { m_board->goDown ();}
     
-    inline void goLeft() const
+     void goLeft() 
     { m_board->goLeft ();}
     
-    inline void goRight() const
+     void goRight() 
     {m_board->goRight ();}
     
-    inline TFigureBoard::BoardType getGameBoard() const
+     TFigureBoard::BoardType getGameBoard() 
     {return TFigureBoard::get ()->getBoard ();}
     
     //singleton
-    static auto get()
+    static BoardController* get()
     {
-      static auto ctl = std::shared_ptr<BoardController>(new BoardController());
+      static auto ctl = new BoardController();
       return ctl;
     }
     
 private:
     BoardController();
 
-    std::shared_ptr<TFigureBoard> m_board;
+    TFigureBoard* m_board;
 };
 
 }

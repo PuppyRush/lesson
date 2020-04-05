@@ -7,7 +7,7 @@
 
 using namespace tetris;
 
-TFigureBuilder::TFigureBuilder(const TPoint &point)
+TFigureBuilder::TFigureBuilder( TPoint point)
     : m_point(point),
       m_width(0),
       m_height(0),
@@ -19,31 +19,31 @@ TFigureBuilder::TFigureBuilder(const TPoint &point)
   }
 
 
-TFigureBuilder* TFigureBuilder::color(const TColor& color)
+TFigureBuilder* TFigureBuilder::color( TColor color)
 {
     this->m_color = color;
     return this;
 }
 
-TFigureBuilder* TFigureBuilder::type(const TFigureType& type)
+TFigureBuilder* TFigureBuilder::type( TFigureType type)
 {
     this->m_figureType = type;
     return this;
 }
 
-TFigureBuilder* TFigureBuilder::age(const t_age& age)
+TFigureBuilder* TFigureBuilder::age( t_age age)
 {
     this->m_age = age;
     return this;
 }
 
-TFigureBuilder *TFigureBuilder::figure(const TFigureClass& figure)
+TFigureBuilder *TFigureBuilder::figure( TFigureClass figure)
 {
     this->m_figureClass = figure;
     return this;
 }
 
-std::shared_ptr<TFigure> TFigureBuilder::build()
+TFigure* TFigureBuilder::build()
 {
     switch(getClass())
     {

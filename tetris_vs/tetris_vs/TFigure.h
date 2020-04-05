@@ -33,36 +33,36 @@ public:
     
     virtual ~TFigure();
     
-    inline const TFigureType getType()
+    TFigureType getType()
     { return m_figureType;}
     
-    inline const size_t getWidth()
+    size_t getWidth()
     { return m_width;}
     
-    inline const size_t getHeight()
+    size_t getHeight()
     { return m_height;}
     
-    inline const TPoint getPoint()
+    TPoint getPoint()
     { return m_point;}
     
-    inline const FigureCoords getCoords()
-    { return m_relativeCoord;}
-    
-    std::shared_ptr<TFigure> goRight();
-    std::shared_ptr<TFigure> goLeft();
-    std::shared_ptr<TFigure> goDown();
-    std::shared_ptr<TFigure> rotateLeft();
-    std::shared_ptr<TFigure> rotateRight();
-    const std::shared_ptr<TFigure> copy() const;
-    virtual const TFigureType getRandomlyFigureType() const;
+    FigureCoords getCoords()
+    { return m_relativeCoord; }
+
+    TFigure* goRight();
+    TFigure* goLeft();
+    TFigure* goDown();
+    TFigure* rotateLeft();
+    TFigure* rotateRight();
+    TFigure* copy() ;
+    virtual  TFigureType getRandomlyFigureType() ;
 
 
     virtual void initialize() = 0;
-    virtual const TFigureType getTypeBegin() const = 0;
-    virtual const TFigureType getTypeEnd() const = 0;
+    virtual  TFigureType getTypeBegin()  = 0;
+    virtual  TFigureType getTypeEnd()  = 0;
 
 protected:
-    TFigure(const TFigureBuilder *bld);
+    TFigure( TFigureBuilder *bld);
     TFigure();
 
     t_size m_figureTypeCount;
@@ -77,7 +77,7 @@ private:
     virtual void _goRight();
     virtual void _goLeft();
     virtual void _goDown();
-    virtual const std::shared_ptr<TFigure> _copy() const = 0;
+    virtual TFigure* _copy() = 0;
     virtual bool _validation() = 0;
     virtual void _rotateLeft() = 0;
     virtual void _rotateRight() = 0;

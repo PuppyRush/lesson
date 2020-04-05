@@ -54,7 +54,7 @@ int main()
     while (quit) {
         auto board = ctl->getGameBoard();
         for (int y = 0 ; y < board.size() ; y++) {
-            const auto &row = board.at(y);
+            auto &row = board.at(y);
             for (int x = 0 ; x < row.size() ; x++) {
                 SDL_Point line[5];
                 line[0].y = 50 + y * 30;
@@ -124,7 +124,6 @@ int main()
                 ctl->goDown();
                 break;
             }
-                /* ... */
         }
 
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);

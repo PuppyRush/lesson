@@ -7,8 +7,7 @@
 using namespace tetris;
 
 BoardController::BoardController()
-:m_board(TFigureBoard::get ()
-)
+:m_board(TFigureBoard::get ())
 {
 
 }

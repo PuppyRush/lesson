@@ -28,7 +28,7 @@ TFigureBoard::TFigureBoard()
 
 void TFigureBoard::createNextFigureRandomly() {
     if (m_currentFigure) {
-        m_currentFigure.reset();
+        m_currentFigure = nullptr;
     }
 
     TFigureBuilder *bld = new TFigureBuilder(TPoint(BOARD_WIDTH_COUNT / 2 - 1, 2));
@@ -37,23 +37,21 @@ void TFigureBoard::createNextFigureRandomly() {
     setCoords();
 }
 
-std::shared_ptr<TFigure> TFigureBoard::getCurrentFigure() {
+TFigure* TFigureBoard::getCurrentFigure() {
     return m_currentFigure;
 }
 
-std::shared_ptr<TFigureBoard> TFigureBoard::get() {
-    static auto board = std::shared_ptr<TFigureBoard>(new TFigureBoard());
+TFigureBoard* TFigureBoard::get() {
+    static auto board = new TFigureBoard();
     return board;
 }
 
 void TFigureBoard::goStraightDown()
 {
-    std::lock_guard<std::mutex> lock(m_mutex);
-
     eraseCoords();
 
-    std::shared_ptr<TFigure> copied(nullptr);
-    while(isValidation(m_currentFigure.get()))
+    TFigure* copied(nullptr);
+    while(isValidation(m_currentFigure))
     {
         copied = m_currentFigure->goDown();
     }
@@ -65,31 +63,29 @@ void TFigureBoard::goStraightDown()
     }
 
     eraseLineIfFillLinesAndThenCollapse();
-
     createNextFigureRandomly();
+
     setCoords();
 }
 
 void TFigureBoard::rotate() {
-    std::lock_guard<std::mutex> lock(m_mutex);
 
     eraseCoords();
 
     auto copied = m_currentFigure->rotateLeft();
-    if (!isValidation(m_currentFigure.get()))
+    if (!isValidation(m_currentFigure))
         m_currentFigure = copied;
 
     setCoords();
 }
 
 void TFigureBoard::goDown() {
-    std::lock_guard<std::mutex> lock(m_mutex);
 
     eraseCoords();
 
     auto copied = m_currentFigure->goDown();
 
-    if (!isValidation(m_currentFigure.get())) {
+    if (!isValidation(m_currentFigure)) {
         m_currentFigure = copied;
         setCoords();
         createNextFigureRandomly();
@@ -99,34 +95,32 @@ void TFigureBoard::goDown() {
 }
 
 void TFigureBoard::goLeft() {
-    std::lock_guard<std::mutex> lock(m_mutex);
 
     eraseCoords();
 
     auto copied = m_currentFigure->goLeft();
-    if (!isValidation(m_currentFigure.get()))
+    if (!isValidation(m_currentFigure))
         m_currentFigure = copied;
 
     setCoords();
 }
 
 void TFigureBoard::goRight() {
-    std::lock_guard<std::mutex> lock(m_mutex);
 
     eraseCoords();
 
     auto copied = m_currentFigure->goRight();
-    if (!isValidation(m_currentFigure.get()))
+    if (!isValidation(m_currentFigure))
         m_currentFigure = copied;
 
     setCoords();
 }
 
-const bool TFigureBoard::isValidation(const TFigure *destFigure) {
+ bool TFigureBoard::isValidation( TFigure *destFigure) {
 
-    for (const auto coord : m_currentFigure->getCoords()) {
-        const auto x = coord.getPoint().x;
-        const auto y = coord.getPoint().y;
+    for ( auto coord : m_currentFigure->getCoords()) {
+         auto x = coord.getPoint().x;
+         auto y = coord.getPoint().y;
 
         if (y < 0 || y >= BOARD_HEIGHT_COUNT  || x < 0 || x >= BOARD_WIDTH_COUNT)
             return false;
@@ -139,18 +133,18 @@ const bool TFigureBoard::isValidation(const TFigure *destFigure) {
 }
 
 void TFigureBoard::eraseCoords() {
-    for (const auto coord : m_currentFigure->getCoords()) {
-        const auto x = coord.getPoint().x;
-        const auto y = coord.getPoint().y;
+    for ( auto coord : m_currentFigure->getCoords()) {
+        auto x = coord.getPoint().x;
+        auto y = coord.getPoint().y;
         m_board[y][x].setType(TFigureUnit::UnitType::Empty);
         m_board[y][x].setColor(TColor::none);
     }
 }
 
 void TFigureBoard::setCoords() {
-    for (const auto coord : m_currentFigure->getCoords()) {
-        const auto x = coord.getPoint().x;
-        const auto y = coord.getPoint().y;
+    for ( auto coord : m_currentFigure->getCoords()) {
+         auto x = coord.getPoint().x;
+         auto y = coord.getPoint().y;
         m_board[y][x].setType(TFigureUnit::UnitType::Fill);
         m_board[y][x].setColor(coord.getColor());
     }
@@ -186,8 +180,8 @@ bool TFigureBoard::eraseLineIfFillLinesAndThenCollapse()
         {
             if(m_board[y][x].getType() == TFigureUnit::UnitType ::Fill)
             {
-                const size_t removedCnt = std::count_if(collapseHeights.begin(), collapseHeights.end(),
-                    [y](const auto _y){
+                 size_t removedCnt = std::count_if(collapseHeights.begin(), collapseHeights.end(),
+                    [y]( auto _y){
                         return y < _y;
                     });
 

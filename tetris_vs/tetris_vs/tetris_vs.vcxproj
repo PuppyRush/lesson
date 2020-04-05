@@ -143,7 +143,6 @@
     <ClCompile Include="TBoardController.cpp" />
     <ClCompile Include="TFigure.cpp" />
     <ClCompile Include="TFigureBoard.cpp" />
-    <ClCompile Include="TFigureBoardBuilder.cpp" />
     <ClCompile Include="TFigureBuilder.cpp" />
     <ClCompile Include="TFigureI.cpp" />
     <ClCompile Include="TFigureL.cpp" />
@@ -154,12 +153,9 @@
     <ClCompile Include="TMain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="RandomGenerator.h" />
     <ClInclude Include="TBoardController.h" />
-    <ClInclude Include="TDefine.h" />
     <ClInclude Include="TFigure.h" />
     <ClInclude Include="TFigureBoard.h" />
-    <ClInclude Include="TFigureBoardBuilder.h" />
     <ClInclude Include="TFigureBuilder.h" />
     <ClInclude Include="TFigureI.h" />
     <ClInclude Include="TFigureL.h" />

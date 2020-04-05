@@ -28,13 +28,13 @@ public:
     
     virtual ~TFigureL();
     virtual void initialize() override;
-    virtual const TFigureType getTypeBegin() const override;
-    virtual const TFigureType getTypeEnd() const override;
+    virtual  TFigureType getTypeBegin()  override;
+    virtual  TFigureType getTypeEnd()  override;
 
 
     //hide base ctr, make object from builder
-    static std::shared_ptr<TFigureL> get(const TFigureBuilder *bld) {
-        auto figure =  std::shared_ptr<TFigureL>(new TFigureL(bld));
+    static TFigureL* get( TFigureBuilder *bld) {
+        auto figure =  new TFigureL(bld);
         figure->initialize ();
         return figure;
     }
@@ -43,9 +43,9 @@ public:
 
 private:
 
-    TFigureL(const TFigureBuilder *bld);
+    TFigureL( TFigureBuilder *bld);
     virtual bool _validation() override;
-    virtual const std::shared_ptr<TFigure> _copy() const override;
+    virtual TFigure* _copy() override;
     //implement pure virtual funtions.
     virtual void _rotateLeft() override;
     virtual void _rotateRight() override;

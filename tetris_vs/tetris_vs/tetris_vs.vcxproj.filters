@@ -24,9 +24,6 @@
     <ClCompile Include="TFigureBoard.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="TFigureBoardBuilder.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="TFigureBuilder.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -56,16 +53,10 @@
     <ClInclude Include="TBoardController.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="TDefine.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="TFigure.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="TFigureBoard.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="TFigureBoardBuilder.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="TFigureBuilder.h">
@@ -96,9 +87,6 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="TypeTraits.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="RandomGenerator.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
