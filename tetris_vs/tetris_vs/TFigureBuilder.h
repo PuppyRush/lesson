@@ -23,13 +23,13 @@ public:
     TFigureBuilder *age( t_age age);
     TFigureBuilder *figure( TFigureClass figure);
 
-      TPoint getPoint()  noexcept { return m_point; }
-      TColor getColor()  noexcept { return m_color; }
-      TFigureType getType()  noexcept { return m_figureType; }
-      t_age getAge()  noexcept { return m_age; }
-      t_size getHeight()  noexcept { return m_height; }
-      t_size getWidth()  noexcept { return m_width; }
-     constexpr  TFigureClass getClass()  noexcept { return m_figureClass; }
+    TPoint getPoint()   { return m_point; }
+    TColor getColor()   { return m_color; }
+    TFigureType getType()   { return m_figureType; }
+    t_age getAge()   { return m_age; }
+    t_size getHeight()   { return m_height; }
+    t_size getWidth()   { return m_width; }
+    TFigureClass getClass()   { return m_figureClass; }
 
     TFigure* build();
 

@@ -116,6 +116,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="array.c" />
+    <ClCompile Include="callbyvalue_callbyref.cpp" />
+    <ClCompile Include="Class.cpp" />
+    <ClCompile Include="Constructor.cpp" />
     <ClCompile Include="pointer.c" />
     <ClCompile Include="pointer2.cpp" />
     <ClCompile Include="string.c" />
@@ -126,6 +129,10 @@
     <ClCompile Include="조건문_스위치.c" />
     <ClCompile Include="함수와 범위.c" />
     <ClCompile Include="형변환_우선순위.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Class.h" />
+    <ClInclude Include="Constructor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -21,22 +21,22 @@ public:
         delete BoardController::get();
     }
     
-     void rotate() 
+    void rotate() 
     { m_board->rotate ();}
 
-     void goStraightDown() 
+    void goStraightDown() 
     { m_board->goStraightDown ();}
 
-     void goDown() 
+    void goDown() 
     { m_board->goDown ();}
     
-     void goLeft() 
+    void goLeft() 
     { m_board->goLeft ();}
     
-     void goRight() 
+    void goRight() 
     {m_board->goRight ();}
     
-     TFigureBoard::BoardType getGameBoard() 
+    TFigureBoard::BoardType getGameBoard() 
     {return TFigureBoard::get ()->getBoard ();}
     
     //singleton

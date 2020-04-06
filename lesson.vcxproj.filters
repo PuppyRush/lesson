@@ -13,15 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\#2">
-      <UniqueIdentifier>{19fa42f5-1939-4245-a410-105823dcdb6c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\#3">
-      <UniqueIdentifier>{913da921-1d2d-470a-8297-00633b7078bd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\#4 배열과 포인터">
-      <UniqueIdentifier>{a2280338-2972-4f48-8434-09d461b175b7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\#5 포인터와 응용">
       <UniqueIdentifier>{cff07ad1-5241-4bd0-8ee4-004b4ec955b7}</UniqueIdentifier>
     </Filter>
@@ -31,40 +22,69 @@
     <Filter Include="Source Files\#7 구조체">
       <UniqueIdentifier>{c23460b4-d4c3-477a-a413-22d40ce96dc9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\#1 기초">
+      <UniqueIdentifier>{b1e8f408-c733-442e-8d32-1fc6b4b9772f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\#2 기초2">
+      <UniqueIdentifier>{19fa42f5-1939-4245-a410-105823dcdb6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\#3 중급">
+      <UniqueIdentifier>{913da921-1d2d-470a-8297-00633b7078bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\#4 구조체와 클래스">
+      <UniqueIdentifier>{a2280338-2972-4f48-8434-09d461b175b7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="형변환_우선순위.c">
-      <Filter>Source Files\#2</Filter>
-    </ClCompile>
     <ClCompile Include="함수와 범위.c">
-      <Filter>Source Files\#3</Filter>
-    </ClCompile>
-    <ClCompile Include="array.c">
-      <Filter>Source Files\#4 배열과 포인터</Filter>
-    </ClCompile>
-    <ClCompile Include="pointer.c">
-      <Filter>Source Files\#4 배열과 포인터</Filter>
-    </ClCompile>
-    <ClCompile Include="pointer2.cpp">
-      <Filter>Source Files\#5 포인터와 응용</Filter>
+      <Filter>Source Files\#3 중급</Filter>
     </ClCompile>
     <ClCompile Include="string.c">
       <Filter>Source Files\#6 문자열</Filter>
     </ClCompile>
-    <ClCompile Include="struct.c">
-      <Filter>Source Files\#7 구조체</Filter>
-    </ClCompile>
-    <ClCompile Include="비트연산.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="조건문.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\#1 기초</Filter>
     </ClCompile>
     <ClCompile Include="조건문_스위치.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\#1 기초</Filter>
+    </ClCompile>
+    <ClCompile Include="형변환_우선순위.c">
+      <Filter>Source Files\#1 기초</Filter>
+    </ClCompile>
+    <ClCompile Include="비트연산.c">
+      <Filter>Source Files\#2 기초2</Filter>
     </ClCompile>
     <ClCompile Include="반복문.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\#2 기초2</Filter>
     </ClCompile>
+    <ClCompile Include="array.c">
+      <Filter>Source Files\#3 중급</Filter>
+    </ClCompile>
+    <ClCompile Include="pointer.c">
+      <Filter>Source Files\#3 중급</Filter>
+    </ClCompile>
+    <ClCompile Include="pointer2.cpp">
+      <Filter>Source Files\#3 중급</Filter>
+    </ClCompile>
+    <ClCompile Include="struct.c">
+      <Filter>Source Files\#4 구조체와 클래스</Filter>
+    </ClCompile>
+    <ClCompile Include="Class.cpp">
+      <Filter>Source Files\#4 구조체와 클래스</Filter>
+    </ClCompile>
+    <ClCompile Include="Constructor.cpp">
+      <Filter>Source Files\#4 구조체와 클래스</Filter>
+    </ClCompile>
+    <ClCompile Include="callbyvalue_callbyref.cpp">
+      <Filter>Source Files\#3 중급</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Class.h">
+      <Filter>Source Files\#4 구조체와 클래스</Filter>
+    </ClInclude>
+    <ClInclude Include="Constructor.h">
+      <Filter>Source Files\#4 구조체와 클래스</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

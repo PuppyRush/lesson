@@ -40,7 +40,7 @@ public:
     }
 
 private:
-    TFigureI(){}
+    TFigureI() = default;
     TFigureI( TFigureBuilder *bld);
     virtual bool _validation() override;
     virtual TFigure* _copy() override;

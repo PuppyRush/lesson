@@ -32,7 +32,7 @@ public:
     using FigureCoords = std::array<TFigureUnit, 4>;
     
     virtual ~TFigure();
-    
+
     TFigureType getType()
     { return m_figureType;}
     
@@ -56,7 +56,7 @@ public:
     TFigure* copy() ;
     virtual  TFigureType getRandomlyFigureType() ;
 
-
+    //pure virtual function
     virtual void initialize() = 0;
     virtual  TFigureType getTypeBegin()  = 0;
     virtual  TFigureType getTypeEnd()  = 0;
@@ -77,6 +77,8 @@ private:
     virtual void _goRight();
     virtual void _goLeft();
     virtual void _goDown();
+
+    //pure virtual function
     virtual TFigure* _copy() = 0;
     virtual bool _validation() = 0;
     virtual void _rotateLeft() = 0;

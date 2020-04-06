@@ -4,14 +4,14 @@
 
 namespace tetris {
 
+enum class UnitType
+{
+    Fill,
+    Empty
+};
+
 class TFigureUnit {
 public:
-    
-    enum class UnitType : tetris::t_type
-    {
-        Fill,
-        Empty
-    };
     
     TFigureUnit();
     TFigureUnit( TPoint point,  t_age age,  TColor color,  UnitType type);

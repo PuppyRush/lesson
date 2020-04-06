@@ -16,7 +16,7 @@ namespace tetris
 {
 
 template<class T>
-constexpr  auto toUType(T enuml) noexcept
+constexpr  auto toUType(T enuml) 
 {
     return static_cast<std::underlying_type_t<T>>(enuml);
 }
@@ -30,13 +30,13 @@ struct EnumIterator
         :value(T::Begin)
     {}
     
-    T begin() noexcept
+    T begin() 
     {
         value = static_cast<T>( toUType(value) << 1);
         return value;
     }
     
-    bool end()  noexcept
+    bool end()  
     {
         return toUType(value) != toUType(T::End);
     }

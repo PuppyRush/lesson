@@ -50,7 +50,6 @@ private:
     
     TFigure* m_currentFigure;
     BoardType m_board;
-    std::mutex m_mutex;
 };
 
 }
