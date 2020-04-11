@@ -7,7 +7,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lesson", "lesson.vcxproj", 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tetris", "tetris_vs\tetris_vs\tetris_vs.vcxproj", "{9FE5D721-89B4-49CB-B701-2D9541E620B4}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "vector", "..\list\list.vcxproj", "{B2CA41B5-9F77-486A-8AE4-082B65BC5FB4}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "vector", "vector\list.vcxproj", "{B2CA41B5-9F77-486A-8AE4-082B65BC5FB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
