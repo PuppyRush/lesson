@@ -63,9 +63,6 @@
     <ClCompile Include="pointer.c">
       <Filter>Source Files\#3 중급</Filter>
     </ClCompile>
-    <ClCompile Include="pointer2.cpp">
-      <Filter>Source Files\#3 중급</Filter>
-    </ClCompile>
     <ClCompile Include="struct.c">
       <Filter>Source Files\#4 구조체와 클래스</Filter>
     </ClCompile>
@@ -79,7 +76,10 @@
       <Filter>Source Files\#3 중급</Filter>
     </ClCompile>
     <ClCompile Include="array_pointer.c">
-      <Filter>Source Files\#3 중급</Filter>
+      <Filter>Source Files\#5 포인터와 응용</Filter>
+    </ClCompile>
+    <ClCompile Include="pointer2.cpp">
+      <Filter>Source Files\#5 포인터와 응용</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

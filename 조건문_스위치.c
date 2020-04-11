@@ -3,6 +3,7 @@
 
 int main()
 {
+    const int A = 10;
     char c1;
 
     scanf("%c", &c1);     // 값을 입력받음
@@ -15,7 +16,7 @@ int main()
     case 'a':    // 문자 a일 때
         printf("a입니다.\n");
         break;
-    case 'b':    // 문자 b일 때
+    case A:    // 문자 b일 때
         printf("b입니다.\n");
         break;
     default:    // 아무 case에도 해당되지 않을 때
