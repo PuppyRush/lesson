@@ -116,7 +116,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="array.c" />
-    <ClCompile Include="callbyvalue_callbyref.cpp" />
+    <ClCompile Include="array_pointer.c" />
+    <ClCompile Include="callby.cpp" />
     <ClCompile Include="Class.cpp" />
     <ClCompile Include="Constructor.cpp" />
     <ClCompile Include="pointer.c" />

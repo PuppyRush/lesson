@@ -75,7 +75,10 @@
     <ClCompile Include="Constructor.cpp">
       <Filter>Source Files\#4 구조체와 클래스</Filter>
     </ClCompile>
-    <ClCompile Include="callbyvalue_callbyref.cpp">
+    <ClCompile Include="callby.cpp">
+      <Filter>Source Files\#3 중급</Filter>
+    </ClCompile>
+    <ClCompile Include="array_pointer.c">
       <Filter>Source Files\#3 중급</Filter>
     </ClCompile>
   </ItemGroup>

@@ -17,7 +17,7 @@ int main()
 
 
     unsigned char i = 1;
-    while (_______)
+    while (i <= 64)
     {
         printf("%u\n", i);
         i <<= 1;
@@ -27,11 +27,11 @@ int main()
     ///do-while
 
     int count;
-
     scanf("%d", &count);    // 값을 입력받음
 
+    // 처음 한 번은 아래 코드가 실행됨
     int i = 0;
-    do // 처음 한 번은 아래 코드가 실행됨
+    do 
     {
         printf("Hello, world! %d\n", i);    // Hello, world!와 i의 값을 함께 출력
         i++;                                // i를 1씩 증가시킴
