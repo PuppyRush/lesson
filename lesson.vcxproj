@@ -115,15 +115,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animal.cpp" />
+    <ClCompile Include="ctor_dtor.cpp" />
     <ClCompile Include="array.c" />
     <ClCompile Include="array_pointer.c" />
     <ClCompile Include="callby.cpp" />
     <ClCompile Include="Class.cpp" />
     <ClCompile Include="Constructor.cpp" />
+    <ClCompile Include="inheritance.cpp" />
+    <ClCompile Include="overloading.cpp" />
     <ClCompile Include="pointer.c" />
     <ClCompile Include="pointer2.cpp" />
     <ClCompile Include="string.c" />
     <ClCompile Include="struct.c" />
+    <ClCompile Include="test.c" />
     <ClCompile Include="반복문.c" />
     <ClCompile Include="비트연산.c" />
     <ClCompile Include="조건문.c" />
@@ -132,6 +137,8 @@
     <ClCompile Include="형변환_우선순위.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animal.h" />
+    <ClInclude Include="animal_basic.h" />
     <ClInclude Include="Class.h" />
     <ClInclude Include="Constructor.h" />
   </ItemGroup>
