@@ -1,32 +1,36 @@
 #include <stdio.h>
 
-#define ARY1 100
-#define ARY2 100
+#define ARY1 10
+#define ARY2 10
 
 int main()
 {
-	int integerarray[10];
-	int* ptr = integerarray;
 
-	printf("%d\n", sizeof(ptr));
+	int integerarray[10];
+	printf("%d\n", sizeof(integerarray));
+	printf("%d\n", sizeof(integerarray[0]));
 
 	for (int i = 0; i < 10; i++)
 		integerarray[i] = i;
 
+	int* ptr = integerarray;
 	for (int i = 0; i < 10; i++)
-		printf("%d, %p\n", *(ptr + i), ptr + i);
+		printf("%d, %p %p", *(ptr + i), ptr + i);
+
 
 	//integerarray++;
 	ptr = integerarray;
 
-	//for (int i = 0; i < 10; i++)
-	//{
-	//	printf("%d, %p\n", *ptr, ptr);
-	//	ptr++;
-	//}
+	for (int i = 0; i < 10; i++)
+	{
+		printf("%d, %p\n", *ptr, ptr);
+		ptr++;
+	}
 
+	ptr = integerarray;
 	int** ptr2 = &ptr;
-	printf("%p %p\n", ptr2, &ptr);
+	printf("%p %p %d\n", ptr, &ptr, *ptr);
+	printf("%p %p %p\n", ptr2, &ptr2, *ptr2);
 
 	//memset
 	int ary2[ARY1][ARY2];
@@ -38,7 +42,7 @@ int main()
 			ary2[i][l] = number++;
 
 	int* aryptr = ary2[3];
-	printf("%d %p", *aryptr, aryptr + 3);
+	printf("%d\n", *(aryptr + 12));
 
 
 	ptr = integerarray;
@@ -47,4 +51,6 @@ int main()
 	value = (*ptr)++;
 	value = ++ * ptr;
 	value = *++ptr;
+
+
 }

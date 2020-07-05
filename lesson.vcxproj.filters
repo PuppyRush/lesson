@@ -25,12 +25,6 @@
     <Filter Include="Source Files\C언어\#3 중급">
       <UniqueIdentifier>{913da921-1d2d-470a-8297-00633b7078bd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\C언어\#4 구조체와 클래스">
-      <UniqueIdentifier>{a2280338-2972-4f48-8434-09d461b175b7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\C언어\#5 포인터와 응용">
-      <UniqueIdentifier>{cff07ad1-5241-4bd0-8ee4-004b4ec955b7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\C언어\#6 문자열">
       <UniqueIdentifier>{f3d6c59d-c9a7-4875-a31d-518a9744641b}</UniqueIdentifier>
     </Filter>
@@ -46,6 +40,9 @@
     <Filter Include="Source Files\C언어\테스트">
       <UniqueIdentifier>{71ae827a-ba33-483e-a266-81949107df57}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\C언어\#5 구조체와 클래스">
+      <UniqueIdentifier>{a2280338-2972-4f48-8434-09d461b175b7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="함수와 범위.c">
@@ -58,9 +55,6 @@
       <Filter>Source Files\C언어\#1 기초</Filter>
     </ClCompile>
     <ClCompile Include="조건문_스위치.c">
-      <Filter>Source Files\C언어\#1 기초</Filter>
-    </ClCompile>
-    <ClCompile Include="형변환_우선순위.c">
       <Filter>Source Files\C언어\#1 기초</Filter>
     </ClCompile>
     <ClCompile Include="비트연산.c">
@@ -76,22 +70,13 @@
       <Filter>Source Files\C언어\#3 중급</Filter>
     </ClCompile>
     <ClCompile Include="struct.c">
-      <Filter>Source Files\C언어\#4 구조체와 클래스</Filter>
+      <Filter>Source Files\C언어\#5 구조체와 클래스</Filter>
     </ClCompile>
     <ClCompile Include="Class.cpp">
-      <Filter>Source Files\C언어\#4 구조체와 클래스</Filter>
+      <Filter>Source Files\C언어\#5 구조체와 클래스</Filter>
     </ClCompile>
     <ClCompile Include="Constructor.cpp">
-      <Filter>Source Files\C언어\#4 구조체와 클래스</Filter>
-    </ClCompile>
-    <ClCompile Include="callby.cpp">
-      <Filter>Source Files\C언어\#3 중급</Filter>
-    </ClCompile>
-    <ClCompile Include="array_pointer.c">
-      <Filter>Source Files\C언어\#5 포인터와 응용</Filter>
-    </ClCompile>
-    <ClCompile Include="pointer2.cpp">
-      <Filter>Source Files\C언어\#5 포인터와 응용</Filter>
+      <Filter>Source Files\C언어\#5 구조체와 클래스</Filter>
     </ClCompile>
     <ClCompile Include="Animal.cpp">
       <Filter>Source Files\C++언어\클래스</Filter>
@@ -108,13 +93,19 @@
     <ClCompile Include="test.c">
       <Filter>Source Files\C언어\테스트</Filter>
     </ClCompile>
+    <ClCompile Include="array_pointer.c">
+      <Filter>Source Files\C언어\#3 중급</Filter>
+    </ClCompile>
+    <ClCompile Include="test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Class.h">
-      <Filter>Source Files\C언어\#4 구조체와 클래스</Filter>
+      <Filter>Source Files\C언어\#5 구조체와 클래스</Filter>
     </ClInclude>
     <ClInclude Include="Constructor.h">
-      <Filter>Source Files\C언어\#4 구조체와 클래스</Filter>
+      <Filter>Source Files\C언어\#5 구조체와 클래스</Filter>
     </ClInclude>
     <ClInclude Include="Animal.h">
       <Filter>Header Files</Filter>

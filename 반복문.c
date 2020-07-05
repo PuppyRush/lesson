@@ -1,10 +1,15 @@
 #include <stdio.h>
 
 //다음 소스 코드를 완성하여 정수 1, 2, 4, 8, 16, 32, 64, 128이 각 줄에 출력되게 만드세요.
-int main()
+void power()
 {
 
+}
 
+
+
+int main()
+{
     //for
 
     for (int i = 0, j = 0; i < 10; i++, j += 2)    // i는 1씩 증가, j는 2씩 증가
