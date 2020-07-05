@@ -90,14 +90,11 @@
     <ClCompile Include="inheritance.cpp">
       <Filter>Source Files\C++언어\클래스</Filter>
     </ClCompile>
-    <ClCompile Include="test.c">
-      <Filter>Source Files\C언어\테스트</Filter>
-    </ClCompile>
     <ClCompile Include="array_pointer.c">
       <Filter>Source Files\C언어\#3 중급</Filter>
     </ClCompile>
-    <ClCompile Include="test.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="test.c">
+      <Filter>Source Files\C언어\테스트</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

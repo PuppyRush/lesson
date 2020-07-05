@@ -127,7 +127,6 @@
     <ClCompile Include="string.c" />
     <ClCompile Include="struct.c" />
     <ClCompile Include="test.c" />
-    <ClCompile Include="test.cpp" />
     <ClCompile Include="반복문.c" />
     <ClCompile Include="비트연산.c" />
     <ClCompile Include="조건문.c" />
