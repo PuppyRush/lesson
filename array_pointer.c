@@ -42,7 +42,7 @@ int main()
 			ary2[i][l] = number++;
 
 	int* aryptr = ary2[3];
-	printf("%d\n", *(aryptr + 12));
+	printf("%p %p %d %d\n", ary2[2], &ary2[2], *ary2[2] , *(aryptr + 12));
 
 
 	ptr = integerarray;
