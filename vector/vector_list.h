@@ -1,9 +1,5 @@
 #include <stdio.h>
 
-const size_t FULL_SIZE = 1000;
-List* queue = NULL;
-List* head = NULL;
-List* tail = NULL;
 
 typedef struct List
 {
@@ -12,6 +8,16 @@ typedef struct List
 	List* front;
 };
 
+const size_t FULL_SIZE = 1000;
+List* queue = NULL;
+List* head = NULL;
+List* tail = NULL;
+
+//queue 변수를 초기화 한다.
+void init()
+{
+	//queue, head, tail을 초기화한다.
+}
 
 //새로운 데이터를 q에 추가하고 새로운 노드를 반환한다.
 List* enque(List* q, int data)
@@ -41,4 +47,20 @@ size_t size(List* q)
 void sort()
 {
 
+}
+
+
+int main()
+{
+	init();
+	enque(queue, 5);
+	enque(queue, 10);
+	enque(queue, 100);
+	deque(queue);
+	enque(queue, 4);
+	enque(queue, 40);
+	find(queue,10);
+	printf("%d", size(queue));
+
+	sort();
 }
