@@ -138,6 +138,7 @@
     <ClInclude Include="animal_basic.h" />
     <ClInclude Include="Class.h" />
     <ClInclude Include="Constructor.h" />
+    <ClInclude Include="pointer_copy.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

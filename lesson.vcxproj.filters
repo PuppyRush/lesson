@@ -110,5 +110,8 @@
     <ClInclude Include="animal_basic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="pointer_copy.c">
+      <Filter>Source Files\C언어\#3 중급</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
