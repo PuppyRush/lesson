@@ -149,12 +149,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         break;
     case WM_PAINT:
         {
-            
             //그리기 예제
             hdc = GetDC(hWnd);
             Rectangle(hdc, 100, 100, 300, 300);
             ReleaseDC(hWnd, hdc);
-
         }
         break;
     case WM_DESTROY:
