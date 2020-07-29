@@ -154,6 +154,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Unit.h" />
+    <ClInclude Include="Wall.h" />
     <ClInclude Include="Worm.h" />
     <ClInclude Include="WormGame.h" />
   </ItemGroup>
@@ -162,6 +163,7 @@
     <ClCompile Include="Feed.cpp" />
     <ClCompile Include="Hurdle.cpp" />
     <ClCompile Include="Unit.cpp" />
+    <ClCompile Include="Wall.cpp" />
     <ClCompile Include="Worm.cpp" />
     <ClCompile Include="WormGame.cpp" />
   </ItemGroup>
