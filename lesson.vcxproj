@@ -121,9 +121,12 @@
     <ClCompile Include="array_pointer.c" />
     <ClCompile Include="Class.cpp" />
     <ClCompile Include="Constructor.cpp" />
+    <ClCompile Include="function_pointer.c" />
+    <ClCompile Include="function_pointer2.c" />
     <ClCompile Include="inheritance.cpp" />
     <ClCompile Include="overloading.cpp" />
     <ClCompile Include="pointer.c" />
+    <ClCompile Include="preprocessor.c" />
     <ClCompile Include="string.c" />
     <ClCompile Include="struct.c" />
     <ClCompile Include="test.c" />

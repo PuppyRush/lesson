@@ -43,6 +43,9 @@
     <Filter Include="Source Files\C언어\#5 구조체와 클래스">
       <UniqueIdentifier>{a2280338-2972-4f48-8434-09d461b175b7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\C언어\나머지">
+      <UniqueIdentifier>{02d6dacf-c749-42e4-afbe-b7d1f278b1e7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="함수와 범위.c">
@@ -95,6 +98,15 @@
     </ClCompile>
     <ClCompile Include="test.c">
       <Filter>Source Files\C언어\테스트</Filter>
+    </ClCompile>
+    <ClCompile Include="function_pointer.c">
+      <Filter>Source Files\C언어\#3 중급</Filter>
+    </ClCompile>
+    <ClCompile Include="function_pointer2.c">
+      <Filter>Source Files\C언어\#3 중급</Filter>
+    </ClCompile>
+    <ClCompile Include="preprocessor.c">
+      <Filter>Source Files\C언어\나머지</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
