@@ -84,15 +84,6 @@
     <ClCompile Include="Animal.cpp">
       <Filter>Source Files\C++언어\클래스</Filter>
     </ClCompile>
-    <ClCompile Include="ctor_dtor.cpp">
-      <Filter>Source Files\C++언어\클래스</Filter>
-    </ClCompile>
-    <ClCompile Include="overloading.cpp">
-      <Filter>Source Files\C++언어\클래스</Filter>
-    </ClCompile>
-    <ClCompile Include="inheritance.cpp">
-      <Filter>Source Files\C++언어\클래스</Filter>
-    </ClCompile>
     <ClCompile Include="array_pointer.c">
       <Filter>Source Files\C언어\#3 중급</Filter>
     </ClCompile>
@@ -108,6 +99,15 @@
     <ClCompile Include="preprocessor.c">
       <Filter>Source Files\C언어\나머지</Filter>
     </ClCompile>
+    <ClCompile Include="ctor_dtor.h">
+      <Filter>Source Files\C++언어\클래스</Filter>
+    </ClCompile>
+    <ClCompile Include="overloading.h">
+      <Filter>Source Files\C++언어\클래스</Filter>
+    </ClCompile>
+    <ClCompile Include="inheritance.h">
+      <Filter>Source Files\C++언어\클래스</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Class.h">
@@ -116,14 +116,17 @@
     <ClInclude Include="Constructor.h">
       <Filter>Source Files\C언어\#5 구조체와 클래스</Filter>
     </ClInclude>
-    <ClInclude Include="Animal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="animal_basic.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="pointer_copy.c">
       <Filter>Source Files\C언어\#3 중급</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>Source Files\C++언어\클래스</Filter>
+    </ClInclude>
+    <ClInclude Include="Animal.h">
+      <Filter>Source Files\C++언어\클래스</Filter>
+    </ClInclude>
+    <ClInclude Include="animal_basic.h">
+      <Filter>Source Files\C++언어\클래스</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -10,7 +10,7 @@ Board::Board(size_t h, size_t w)
 		board[i] = new Unit*[width];
 		for (int l = 0; l < width; l++)
 		{
-			board[i][l] = new Unit{l,i};
+			board[i][l] = new Unit{static_cast<size_t>(l),static_cast<size_t>(i) };
 		}
 
 	} 

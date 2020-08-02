@@ -138,6 +138,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="queue_linkedlist.h" />
     <ClInclude Include="stack_array.h" />
     <ClInclude Include="stack_linkstedlist.h" />
   </ItemGroup>

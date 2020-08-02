@@ -116,15 +116,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animal.cpp" />
-    <ClCompile Include="ctor_dtor.cpp" />
+    <ClCompile Include="ctor_dtor.h" />
     <ClCompile Include="array.c" />
     <ClCompile Include="array_pointer.c" />
     <ClCompile Include="Class.cpp" />
     <ClCompile Include="Constructor.cpp" />
     <ClCompile Include="function_pointer.c" />
     <ClCompile Include="function_pointer2.c" />
-    <ClCompile Include="inheritance.cpp" />
-    <ClCompile Include="overloading.cpp" />
+    <ClCompile Include="inheritance.h" />
+    <ClCompile Include="overloading.h" />
     <ClCompile Include="pointer.c" />
     <ClCompile Include="preprocessor.c" />
     <ClCompile Include="string.c" />
@@ -141,6 +141,7 @@
     <ClInclude Include="animal_basic.h" />
     <ClInclude Include="Class.h" />
     <ClInclude Include="Constructor.h" />
+    <ClInclude Include="main.h" />
     <ClInclude Include="pointer_copy.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

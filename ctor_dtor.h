@@ -25,11 +25,9 @@ class Animal
 //범위지정자는 기본 private
 public:
 
-	//생성자 constructor ctor
-	//default ctor
-
 	//생성자의 호출 시점.
 	//동적변수와 정적변수일때 모두 동일하다.
+
 	Animal()
 		:age(20), sex(EnumSex::None), color(EnumColor::Black)
 	{
@@ -85,6 +83,12 @@ public:
 		name = _name;
 	}
 
+	
+	void SetName(std::string& _name)
+	{
+		name = &_name;
+
+	}
 private:
 	//member variable
 	int age;
@@ -93,3 +97,10 @@ private:
 	std::string* name;
 
 };
+
+
+//Getter,Setter의 의미?
+//new, delete의 의미와 활용
+//참조자의 특징?
+
+//코드와 관련하여 - 클래스/함수/변수이름 짓기.

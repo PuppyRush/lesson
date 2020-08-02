@@ -64,7 +64,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 }
 
 
-
 //
 //  함수: MyRegisterClass()
 //
@@ -184,6 +183,19 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_DESTROY:
         PostQuitMessage(0);
         break;
+        
+    //창의 초기화
+    case WM_CREATE:
+    {
+        //_T, wchar_t는 유니코드/멀티바이트 학습이 필요
+        const wchar_t* lyrics = _T("static");
+        CreateWindowW(_T("Static"), lyrics,
+            WS_CHILD | WS_VISIBLE | SS_LEFT,
+            20, 20, 100, 100,
+            hWnd, (HMENU)1, NULL, NULL);
+
+        break;
+    }
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);
     }
