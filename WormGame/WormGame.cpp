@@ -104,6 +104,8 @@ void InitGame()
     //지렁이를 초기화 한다.
     g_Board.setUnit( new Worm{ 5,5 });
     
+    Worm w{ 3,4 };
+
     //... 
 }
 
@@ -171,6 +173,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             }
         }
         break;
+    case WM_MOUSEMOVE:
     case WM_PAINT:
         {
             //그리기 예제

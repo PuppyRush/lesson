@@ -1,40 +1,65 @@
 #pragma once
-
 #include <stdio.h>
+#include <stdlib.h>
 
 typedef struct Node
 {
 	int value;
 	Node* next;
 	Node* prev;
-};
+}Node;
 
-Node* top = NULL;
+Node* Head;
+Node* Top;
 
-void push(int value);
+//스택의 맨 위에 값을 추가한다.
+Node* push(Node* a, int value)
+{
+	if (a == NULL)
+	{
+		a = (Node*)malloc(sizeof(Node));
+		a->value = value;
+		a->next = NULL;
+		a->prev = NULL;
+		Top = a;
+
+		return a;
+	}
+	else
+	{
+		Node* temp = (Node*)malloc(sizeof(Node));
+		temp->next = NULL;
+		temp->value = value;
+		temp->prev = a;
+		a->next = temp;
+		Top = temp;
+		return temp;
+	}
+}
 
 //스택의 맨 위를 제거한다.
-int pop();
-
-//스택의 모든 값을 초기화합니다.
-void clear();
-
-//맨 위의 값을 돌려줍니다.
-int top();
-
+Node* pop(Node* a)
+{
+	if (a == NULL)
+	{
+	}
+	else
+	{
+		a->prev->next = NULL;
+		Top = a->prev;
+		free(a);
+	}
+	return 0;
+}
 
 int main()
 {
 
-	push(5);
-	push(3);
-	push(4);
-	pop();
+	push(Head, 5);
+	push(Head, 3);
+	push(Top, 4);
+	pop(Head);
 
-	push(4);
-	top();
-
-	clear();
+	push(Top, 4);
 
 }
-

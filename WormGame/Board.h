@@ -10,6 +10,7 @@ class Board
 {
 
 public:
+
 	Board() = delete;
 	Board(size_t height, size_t width);
 

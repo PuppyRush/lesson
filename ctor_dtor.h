@@ -29,11 +29,12 @@ public:
 	//동적변수와 정적변수일때 모두 동일하다.
 
 	Animal()
-		:age(20), sex(EnumSex::None), color(EnumColor::Black)
+		:age(20), sex(EnumSex::None), color(EnumColor::Black),name(nullptr)
 	{
 		name = new std::string{};
 	}
 
+	//RAII
 	//생성자 오버로딩
 	Animal(int _age, EnumColor _color, EnumSex _sex, std::string* _name)
 		:age(_age), color(_color), sex(_sex), name(_name)
@@ -41,7 +42,9 @@ public:
 		//1. 컴파일러의 초기값이 아닌 개발자가 정의한 초기값이 필요한 경우
 		//2. 복사의 비용이 많이 비싼 멤버 변수가 있는 경우.
 		//3. 부모클래스의 생성자를 호출하는 경우.
-	{}
+	{
+
+	}
 
 	//소멸자 destructor dtor
 	//소멸자는 오버로딩 대상이 안됨.
