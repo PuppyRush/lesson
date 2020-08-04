@@ -9,7 +9,6 @@ typedef struct Node
 	Node* prev;
 }Node;
 
-Node* Head;
 Node* Top;
 
 //스택의 맨 위에 값을 추가한다.
@@ -45,8 +44,11 @@ Node* pop(Node* a)
 	}
 	else
 	{
-		a->prev->next = NULL;
-		Top = a->prev;
+		if (a->prev != NULL)
+		{
+			a->prev->next = NULL;
+			Top = a->prev;
+		}
 		free(a);
 	}
 	return 0;
@@ -55,11 +57,10 @@ Node* pop(Node* a)
 int main()
 {
 
-	push(Head, 5);
-	push(Head, 3);
+	push(Top, 5);
+	push(Top, 3);
 	push(Top, 4);
-	pop(Head);
-
+	pop(Top);
 	push(Top, 4);
 
 }
