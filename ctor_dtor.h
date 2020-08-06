@@ -31,6 +31,7 @@ public:
 	Animal()
 		:age(20), sex(EnumSex::None), color(EnumColor::Black),name(nullptr)
 	{
+		std::cout << "Call Ctor %x " << this << std::endl;
 		name = new std::string{};
 	}
 

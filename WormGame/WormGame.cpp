@@ -3,7 +3,7 @@
 
 #include "framework.h"
 #include "WormGame.h"
-#include "Board.h"
+#include "GameController.h"
 
 #define MAX_LOADSTRING 100
 
@@ -12,8 +12,7 @@ HINSTANCE g_hInst;                                // 현재 인스턴스입니�
 WCHAR g_szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
 WCHAR g_szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
 
-Board g_Board{ 20,20 };
-
+GameController g_ctl;
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -94,19 +93,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 
 void InitGame()
 {
-    //g_Board를 초기화한다.
-    //벽을 초기화 한다.
-    g_Board.setUnit( new Wall{ 0,0 });
-    g_Board.setUnit( new Wall{ 0,1 });
-    g_Board.setUnit( new Wall{ 0,2 });
-    //...나머지 벽들도 초기화 한다.
 
-    //지렁이를 초기화 한다.
-    g_Board.setUnit( new Worm{ 5,5 });
-    
-    Worm w{ 3,4 };
-
-    //... 
 }
 
 //
@@ -173,14 +160,28 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             }
         }
         break;
-    case WM_MOUSEMOVE:
+    case WM_LBUTTONDOWN:
+        {
+            HDC h_dc = GetDC(hWnd);
+
+            // 파란색 브러쉬를 설정해 주는 작업입니다.
+            HBRUSH bru;
+
+            size_t x = LOWORD(lParam);
+            size_t y = HIWORD(lParam);
+            // 사각형을 그려줍니다.
+            bru = CreateSolidBrush(RGB(0, 0, 255));
+            SelectObject(h_dc, bru);
+            Rectangle(h_dc, x, y, 200, 200);
+            break;
+        }
     case WM_PAINT:
         {
             //그리기 예제
             //이곳에서 Board의 배열의 값들을 가져와서 읽는다.
-            hdc = GetDC(hWnd);
-            Rectangle(hdc, 100, 100, 300, 300);
-            ReleaseDC(hWnd, hdc);
+            PAINTSTRUCT ps;
+            HDC h_dc = BeginPaint(hWnd, &ps);
+            EndPaint(hWnd, &ps);
         }
         break;
     case WM_DESTROY:
@@ -190,7 +191,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     //창의 초기화
     case WM_CREATE:
     {
-        //_T, wchar_t는 유니코드/멀티바이트 학습이 필요
+        //_T, wchar_t는 유니코드/멀티바이트 별도 인코딩 지식 필요
         const wchar_t* lyrics = _T("static");
         CreateWindowW(_T("Static"), lyrics,
             WS_CHILD | WS_VISIBLE | SS_LEFT,
