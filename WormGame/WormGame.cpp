@@ -160,15 +160,21 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             }
         }
         break;
+    case WM_KEYDOWN:
+        //static_cast는 c++에서의 명시적 형변환을 위한 예약어
+        //키보드 처리를 이곳에서 g_ctl에 넘겨준다.
+        g_ctl.command(static_cast<UINT>(wParam));
+        break;
     case WM_LBUTTONDOWN:
         {
-            HDC h_dc = GetDC(hWnd);
-
+            // 그리기 예시
             // 파란색 브러쉬를 설정해 주는 작업입니다.
-            HBRUSH bru;
 
+            HDC h_dc = GetDC(hWnd);
+            HBRUSH bru;
             size_t x = LOWORD(lParam);
             size_t y = HIWORD(lParam);
+
             // 사각형을 그려줍니다.
             bru = CreateSolidBrush(RGB(0, 0, 255));
             SelectObject(h_dc, bru);
@@ -178,7 +184,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_PAINT:
         {
             //그리기 예제
-            //이곳에서 Board의 배열의 값들을 가져와서 읽는다.
+            //WM_PAINT 메세지에 관한 설명은 다음 링크를 참고한다. (http://www.tipssoft.com/bulletin/board.php?bo_table=FAQ&wr_id=636)
+            //이곳에서 g_ctl로부터 배열의 상태를 가져와 단순히 그림을 그리는 작업만을 하게 된다.
             PAINTSTRUCT ps;
             HDC h_dc = BeginPaint(hWnd, &ps);
             EndPaint(hWnd, &ps);
@@ -188,7 +195,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         PostQuitMessage(0);
         break;
         
-    //창의 초기화
+    //창의 초기화. CreateWindows함수가 호출되면 윈도우가 자체적으로 WM_CREATE 메세지를 발생시킨다.
     case WM_CREATE:
     {
         //_T, wchar_t는 유니코드/멀티바이트 별도 인코딩 지식 필요
