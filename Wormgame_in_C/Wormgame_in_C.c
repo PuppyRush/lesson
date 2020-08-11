@@ -3,6 +3,7 @@
 
 #include "framework.h"
 #include "Wormgame_in_C.h"
+#include "worm.h"
 
 #define MAX_LOADSTRING 100
 
@@ -47,7 +48,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     // 기본 메시지 루프입니다. 윈도우 이벤트를 받아와서 이곳에서 메세지를 보냅니다.
     // GetMessage->DispatchMessage 과정으로 메세지를 WndProc에서 처리하게 됩니다.
-    while (GetMessage(&msg, nullptr, 0, 0))
+    while (GetMessage(&msg, NULL, 0, 0))
     {
         if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
         {
@@ -55,6 +56,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             DispatchMessage(&msg);
         }
     }
+
+    finalize();
 
     return (int)msg.wParam;
 }
@@ -77,7 +80,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.cbWndExtra = 0;
     wcex.hInstance = hInstance;
     wcex.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_WORMGAMEINC));
-    wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
+    wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
     wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
     wcex.lpszMenuName = MAKEINTRESOURCEW(IDC_WORMGAMEINC);
     wcex.lpszClassName = g_szWindowClass;
@@ -90,7 +93,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 
 void InitGame()
 {
-
+    init_game();
 }
 
 //
@@ -107,16 +110,16 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
     g_hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
-    HWND hWnd = CreateWindowW(g_szWindowClass, g_szTitle, WS_OVERLAPPEDWINDOW,
-        CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+    g_hwndWnd = CreateWindowW(g_szWindowClass, g_szTitle, WS_OVERLAPPEDWINDOW,
+        CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, NULL, NULL, hInstance, NULL);
 
-    if (!hWnd)
+    if (!g_hwndWnd)
     {
         return FALSE;
     }
 
-    ShowWindow(hWnd, nCmdShow);
-    UpdateWindow(hWnd);
+    ShowWindow(g_hwndWnd, nCmdShow);
+    UpdateWindow(g_hwndWnd);
 
     return TRUE;
 }
@@ -202,6 +205,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
         break;
     }
+    case WM_TIMER:
+        //TIMER_ID는 몇?
+        break;
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);
     }

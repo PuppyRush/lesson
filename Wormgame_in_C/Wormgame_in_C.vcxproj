@@ -150,10 +150,11 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="worm.h" />
     <ClInclude Include="Wormgame_in_C.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Wormgame_in_C.cpp" />
+    <ClCompile Include="Wormgame_in_C.c" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Wormgame_in_C.rc" />
