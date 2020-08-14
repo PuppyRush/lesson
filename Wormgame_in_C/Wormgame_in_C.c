@@ -41,6 +41,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     }
 
     //게임 관련 변수들을 초기화 합니다.
+    
     InitGame();
 
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_WORMGAMEINC));
@@ -163,21 +164,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     }
     break;
     case WM_KEYDOWN:
+        keydown(wParam);
         break;
     case WM_LBUTTONDOWN:
     {
         // 그리기 예시
         // 파란색 브러쉬를 설정해 주는 작업입니다.
 
-        HDC h_dc = GetDC(hWnd);
-        HBRUSH bru;
-        size_t x = LOWORD(lParam);
-        size_t y = HIWORD(lParam);
-
-        // 사각형을 그려줍니다.
-        bru = CreateSolidBrush(RGB(0, 0, 255));
-        SelectObject(h_dc, bru);
-        Rectangle(h_dc, x, y, 200, 200);
         break;
     }
     case WM_PAINT:
@@ -185,8 +178,39 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         //그리기 예제
         //WM_PAINT 메세지에 관한 설명은 다음 링크를 참고한다. (http://www.tipssoft.com/bulletin/board.php?bo_table=FAQ&wr_id=636)
         PAINTSTRUCT ps;
-        HDC h_dc = BeginPaint(hWnd, &ps);
-        EndPaint(hWnd, &ps);
+      
+
+        HBRUSH bru;
+
+        // 사각형을 그려줍니다.
+        
+
+        for (int i = 0; i < g_height; i++)
+        {
+            for (int l = 0; l < g_width; l++)
+            {
+                HDC h_dc = GetDC(hWnd);
+                switch(g_map[i][l].type)
+                {
+                case eWall:
+                    bru = (HBRUSH)GetStockObject(BLACK_BRUSH);    //투명 브러시 사용
+                    SelectObject(h_dc, bru);
+                    break;
+                case eWorm:
+                    bru = CreateSolidBrush(RGB(0, 128, 128));
+                    SelectObject(h_dc, bru);
+                    break;
+                default:
+                    //exception
+                    ;
+                }
+                size_t x = getLeftInMap(l);
+                size_t y = getTopInMap(i);
+                Rectangle(h_dc, x, y, x + UNIT_WIDTH_LEN, y + UNIT_HEIGHT_LEN);
+                ReleaseDC(hWnd, h_dc);
+            }
+        }
+        
     }
     break;
     case WM_DESTROY:
@@ -196,17 +220,23 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         //창의 초기화. CreateWindows함수가 호출되면 윈도우가 자체적으로 WM_CREATE 메세지를 발생시킨다.
     case WM_CREATE:
     {
+        //Timer 지정
+        //Timer를 이용하여 주기적으로 처리해야할 일을 수행한다.
+        //http://www.tipssoft.com/bulletin/board.php?bo_table=FAQ&wr_id=2192
+        SetTimer(hWnd, 0, 1, 0);
+
         //_T, wchar_t는 유니코드/멀티바이트 별도 인코딩 지식 필요
-        const wchar_t* lyrics = _T("static");
+     /*   const wchar_t* lyrics = _T("static");
         CreateWindowW(_T("Static"), lyrics,
             WS_CHILD | WS_VISIBLE | SS_LEFT,
             20, 20, 100, 100,
-            hWnd, (HMENU)1, NULL, NULL);
+            hWnd, (HMENU)1, NULL, NULL);*/
 
         break;
     }
     case WM_TIMER:
         //TIMER_ID는 몇?
+        timer();
         break;
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);

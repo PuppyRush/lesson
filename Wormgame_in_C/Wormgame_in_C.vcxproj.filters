@@ -30,6 +30,12 @@
     <ClInclude Include="worm.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="data.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="define.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Wormgame_in_C.rc">
