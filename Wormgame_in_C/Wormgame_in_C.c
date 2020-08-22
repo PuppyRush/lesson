@@ -1,6 +1,7 @@
 ﻿// WormGame.cpp : 애플리케이션에 대한 진입점을 정의합니다.
 //
 
+#include <time.h>
 #include "framework.h"
 #include "Wormgame_in_C.h"
 #include "worm.h"
@@ -124,6 +125,49 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
     return TRUE;
 }
+static void paint(HWND hWnd)
+{
+    //그리기 예제
+    //WM_PAINT 메세지에 관한 설명은 다음 링크를 참고한다. (http://www.tipssoft.com/bulletin/board.php?bo_table=FAQ&wr_id=636)
+    PAINTSTRUCT ps;
+    HBRUSH bru;
+
+    // 사각형을 그려줍니다.
+    for (int i = 0; i < g_height; i++)
+    {
+        for (int l = 0; l < g_width; l++)
+        {
+            HDC h_dc = GetDC(hWnd);
+            switch (g_map[i][l].type)
+            {
+            case eWall:
+                bru = (HBRUSH)GetStockObject(BLACK_BRUSH);    //투명 브러시 사용
+                SelectObject(h_dc, bru);
+                break;
+            case eWorm:
+                bru = CreateSolidBrush(RGB(0, 128, 128));
+                SelectObject(h_dc, bru);
+                break;
+            case eFeed:
+                bru = (HBRUSH)GetStockObject(DKGRAY_BRUSH);
+                SelectObject(h_dc, bru);
+                break;
+            case eNone:
+                /*bru = CreateSolidBrush(WHITE_BRUSH);
+                SelectObject(h_dc, bru);
+                break;*/
+            default:
+                //exception
+                ;
+            }
+            size_t x = getLeftInMap(l);
+            size_t y = getTopInMap(i);
+            Rectangle(h_dc, x, y, x + UNIT_WIDTH_LEN, y + UNIT_HEIGHT_LEN);
+            ReleaseDC(hWnd, h_dc);
+        }
+    }
+
+}
 
 //
 //  함수: WndProc(HWND, UINT, WPARAM, LPARAM)
@@ -175,42 +219,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     }
     case WM_PAINT:
     {
-        //그리기 예제
-        //WM_PAINT 메세지에 관한 설명은 다음 링크를 참고한다. (http://www.tipssoft.com/bulletin/board.php?bo_table=FAQ&wr_id=636)
-        PAINTSTRUCT ps;
-      
-
-        HBRUSH bru;
-
-        // 사각형을 그려줍니다.
-        
-
-        for (int i = 0; i < g_height; i++)
-        {
-            for (int l = 0; l < g_width; l++)
-            {
-                HDC h_dc = GetDC(hWnd);
-                switch(g_map[i][l].type)
-                {
-                case eWall:
-                    bru = (HBRUSH)GetStockObject(BLACK_BRUSH);    //투명 브러시 사용
-                    SelectObject(h_dc, bru);
-                    break;
-                case eWorm:
-                    bru = CreateSolidBrush(RGB(0, 128, 128));
-                    SelectObject(h_dc, bru);
-                    break;
-                default:
-                    //exception
-                    ;
-                }
-                size_t x = getLeftInMap(l);
-                size_t y = getTopInMap(i);
-                Rectangle(h_dc, x, y, x + UNIT_WIDTH_LEN, y + UNIT_HEIGHT_LEN);
-                ReleaseDC(hWnd, h_dc);
-            }
-        }
-        
+        paint(hWnd);
     }
     break;
     case WM_DESTROY:
@@ -223,27 +232,32 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         //Timer 지정
         //Timer를 이용하여 주기적으로 처리해야할 일을 수행한다.
         //http://www.tipssoft.com/bulletin/board.php?bo_table=FAQ&wr_id=2192
-        SetTimer(hWnd, 0, 1, 0);
-
-        //_T, wchar_t는 유니코드/멀티바이트 별도 인코딩 지식 필요
-     /*   const wchar_t* lyrics = _T("static");
-        CreateWindowW(_T("Static"), lyrics,
-            WS_CHILD | WS_VISIBLE | SS_LEFT,
-            20, 20, 100, 100,
-            hWnd, (HMENU)1, NULL, NULL);*/
+        SetTimer(hWnd, 0, 500, 0);
 
         break;
     }
     case WM_TIMER:
         //TIMER_ID는 몇?
         timer();
+        paint(hWnd);
+        UpdateWindow(hWnd);
+        static int a = 0;
+        const wchar_t str = a++;
+        //
+        //const wchar_t* lyrics = malloc(sizeof(wchar_t) * 5);
+        //swprintf_s(lyrics, L"%d", a);
+
+        //CreateWindowW(_T("Static"), lyrics,
+        //    WS_CHILD | WS_VISIBLE | SS_LEFT,
+        //    20, 20, 100, 100,
+        //    hWnd, (HMENU)1, NULL, NULL);
         break;
     default:
-        return DefWindowProc(hWnd, message, wParam, lParam);
+        ;
     }
+    return DefWindowProc(hWnd, message, wParam, lParam);
     return 0;
 }
-
 // 정보 대화 상자의 메시지 처리기입니다.
 INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {

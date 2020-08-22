@@ -1,5 +1,6 @@
 #pragma once
 
+#define INVALID_VALUE 123456789
 #define UNIT_HEIGHT_SIZE 20
 #define UNIT_WIDTH_SIZE 20 
 #define TIMER_ID 1000

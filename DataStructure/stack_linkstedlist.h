@@ -2,21 +2,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct Node
+typedef struct WormNode
 {
 	int value;
-	Node* next;
-	Node* prev;
-}Node;
+	WormNode* next;
+	WormNode* prev;
+}WormNode;
 
-Node* Top;
+WormNode* Top;
 
 //스택의 맨 위에 값을 추가한다.
-Node* push(Node* a, int value)
+WormNode* push(WormNode* a, int value)
 {
 	if (a == NULL)
 	{
-		a = (Node*)malloc(sizeof(Node));
+		a = (WormNode*)malloc(sizeof(WormNode));
 		a->value = value;
 		a->next = NULL;
 		a->prev = NULL;
@@ -26,7 +26,7 @@ Node* push(Node* a, int value)
 	}
 	else
 	{
-		Node* temp = (Node*)malloc(sizeof(Node));
+		WormNode* temp = (WormNode*)malloc(sizeof(WormNode));
 		temp->next = NULL;
 		temp->value = value;
 		temp->prev = a;
@@ -37,7 +37,7 @@ Node* push(Node* a, int value)
 }
 
 //스택의 맨 위를 제거한다.
-Node* pop(Node* a)
+WormNode* pop(WormNode* a)
 {
 	if (a == NULL)
 	{

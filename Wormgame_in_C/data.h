@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 typedef enum Type
 {
 	eWall,
@@ -13,10 +11,11 @@ typedef enum Type
 
 typedef enum Order
 {
-	eLeft,
+	eLeft = 0,
 	eRight,
 	eUp,
-	eDown
+	eDown,
+	eOrder
 }Order;
 
 typedef struct Coord
@@ -32,9 +31,15 @@ typedef struct Worm
 	Order order;
 }Worm;
 
+typedef struct WormNode
+{
+	struct Worm worm;
+	struct WormNode* next;
+	struct WormNode* prev;
+}WormNode;
+
 typedef struct Map
 {
 	Type type;
-	Coord coord;
 }Map;
 Map** g_map;

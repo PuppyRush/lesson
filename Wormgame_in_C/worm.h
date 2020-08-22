@@ -1,33 +1,105 @@
 #pragma once
 
 #include <limits.h>
-#include "data.h"
 #include "define.h"
+#include "list.h"
 
 static const size_t INVALID_SIZE = UINT_MAX;
 
 //메인 윈도우 핸들러
 static HWND g_hwndWnd = NULL;
 static HWND g_hwndProc = NULL;
-//지렁이 자료구조를 위한 변수
-static Worm* g_wormHead = NULL;
-static Worm* g_wormTail = NULL;
 
 //extern과 static의 차이?
 //https://dojang.io/mod/page/view.php?id=690
 static	size_t g_width = 0;
 static	size_t g_height = 0;
 
+static Coord g_feed;
 
-void CALLBACK MyTimerProc(HWND hWnd, UINT nMsg, UINT_PTR nIDEvent, DWORD dwTime)
+static Coord getRandomCoord()
 {
-	// 함수가 호출될때 작업할 내용을 여기에 적으면 됩니다. 
-	int a;
-	a = 3;
+	Coord c;
+	c.x = ( rand() % (UNIT_WIDTH_SIZE-2))+1;
+	c.y = ( rand() % (UNIT_HEIGHT_SIZE-2))+1;
+	return c;
+}
+
+static void SetCoordInMap(Coord coord, Type t)
+{
+	g_map[coord.y][coord.x].type = t;
+}
+
+static BOOL compareCoord(Coord lhs, Coord rhs)
+{
+	return lhs.x == rhs.x && lhs.y == rhs.y;
+}
+
+static Worm getNewTail()
+{
+	Worm worm;
+	size_t y = g_wormTail->worm.coord.y;
+	size_t x = g_wormTail->worm.coord.x;
+
+	if (g_map[y + 1][x].type != eNone && g_map[y - 1][x].type != eNone && g_map[y][x - 1].type != eNone && g_map[y][x + 1].type != eNone)
+	{
+		worm.coord.y = INVALID_VALUE;
+		worm.coord.x = INVALID_VALUE;
+		return worm;
+	}
+	
+	//shuffle - 순서를 섞는다.
+	int rnd[eOrder] = { eLeft, eRight, eDown, eUp };
+	for (int i = 0; i < 5; i++)
+	{
+		char lhs = rand() % eOrder;
+		char rhs = rand() % eOrder;
+		char tmp = rnd[lhs];
+		rnd[lhs] = rnd[rhs];
+		rnd[rhs] = tmp;
+	}
+
+	for(int i=0 ; i < eOrder ; i++)
+	{
+		size_t order = rnd[i];
+		
+		if (order == eLeft && g_map[y][x-1].type == eNone)
+		{
+			worm.order = eRight;
+			worm.coord.x = x + 1;
+			worm.coord.y = y;
+			break;
+		}
+		else if (order == eRight && g_map[y][x + 1].type == eNone)
+		{
+			worm.order = eLeft;
+			worm.coord.x = x - 1;
+			worm.coord.y = y;
+			break;
+		}
+		else if (order == eUp && g_map[y-1][x].type == eNone)
+		{
+			worm.order = eDown;
+			worm.coord.x = x;
+			worm.coord.y = y+1;
+			break;
+		}
+		else if (order == eDown && g_map[y+1][x].type == eNone)
+		{
+			worm.order = eUp;
+			worm.coord.x = x;
+			worm.coord.y = y-1;
+			break;
+		}
+	}
+
+	return worm;
 }
 
 static void init_game()
 {
+	srand((unsigned int)time(NULL));
+
 	g_width = UNIT_WIDTH_SIZE;
 	g_height = UNIT_HEIGHT_SIZE;
 
@@ -50,8 +122,6 @@ static void init_game()
 		for (int l = 0; l < g_width; l++)
 		{
 			g_map[i][l].type = eNone;
-			g_map[i][l].coord.x = l;
-			g_map[i][l].coord.y = i;
 		}
 	}
 
@@ -84,36 +154,111 @@ static void init_game()
 	h = g_height / 2;
 	w = g_width / 2;
 	g_map[h][w].type = eWorm;
-	g_map[h][w].coord.x = w;
-	g_map[h][w].coord.y = h;
 
 	g_wormTail = g_wormHead = (Worm*)malloc(sizeof(Worm));
-	g_wormHead->coord.x = w;
-	g_wormHead->coord.y = h;
-	g_wormHead->order = eLeft;
+	g_wormHead->worm.coord.x = w;
+	g_wormHead->worm.coord.y = h;
+	g_wormHead->worm.order = eLeft;
+	g_wormHead->prev = NULL;
+	g_wormHead->next = NULL;
 
-
+	g_feed = getRandomCoord();
+	g_map[g_feed.y][g_feed.x].type = eFeed;
 }
 
 static void timer()
 {
-	switch (g_wormHead->order)
+	g_map[g_wormHead->worm.coord.y][g_wormHead->worm.coord.x].type = eNone;
+	switch (g_wormHead->worm.order)
 	{
 	case eLeft:
-		g_wormHead->coord.x -= 1;
+		if (g_wormHead->worm.coord.x == 0 )
+		{
+		}
+		else
+		{
+			g_map[g_wormHead->worm.coord.y][g_wormHead->worm.coord.x - 1].type = eWorm;
+			g_wormHead->worm.coord.x -= 1;
+		}
+
 		break;
 	case eRight:
-		g_wormHead->coord.x += 1;
+		if (g_wormHead->worm.coord.x == g_width - 1 )
+		{
+		}
+		else
+		{
+			g_map[g_wormHead->worm.coord.y][g_wormHead->worm.coord.x + 1].type = eWorm;
+			g_wormHead->worm.coord.x += 1;
+		}
+
 		break;
 	case eDown:
-		g_wormHead->coord.y += 1;
+		if (g_wormHead->worm.coord.y == g_height - 1)
+		{
+		}
+		else
+		{
+			g_map[g_wormHead->worm.coord.y + 1][g_wormHead->worm.coord.x].type = eWorm;
+			g_wormHead->worm.coord.y += 1;
+		}
+
 		break;
 	case eUp:
-		g_wormHead->coord.y -= 1;
+		if (g_wormHead->worm.coord.x == 0 )
+		{
+		}
+		else
+		{
+			g_map[g_wormHead->worm.coord.y - 1][g_wormHead->worm.coord.x].type = eWorm;
+			g_wormHead->worm.coord.y -= 1;
+		}
+
 		break;
 	default:
 		break;
 	}
+
+	WormNode* node = g_wormTail;
+	while (node != NULL && node->prev != NULL)
+	{
+		g_map[node->worm.coord.y][node->worm.coord.x].type = eNone;
+		if (node->worm.order == eLeft)
+		{
+			node->worm.coord.x -= 1;
+			g_map[node->worm.coord.y][node->worm.coord.x-1].type = eWorm;
+		}
+		else if (node->worm.order == eRight)
+		{
+			node->worm.coord.x += 1;
+			g_map[node->worm.coord.y][node->worm.coord.x + 1].type = eWorm;
+		}
+		else if (node->worm.order == eDown)
+		{
+			node->worm.coord.y += 1;
+			g_map[node->worm.coord.y+1][node->worm.coord.x].type = eWorm;
+		}
+		else if (node->worm.order == eUp)
+		{
+			node->worm.coord.y -= 1;
+			g_map[node->worm.coord.y-1][node->worm.coord.x].type = eWorm;
+		}
+
+		node = node->prev;
+	}
+
+	if (compareCoord(g_wormTail->worm.coord, g_feed))
+	{
+
+		//g_map[g_feed.y][g_feed.x].type = eNone;
+		g_feed = getRandomCoord();
+		g_map[g_feed.y][g_feed.x].type = eFeed;
+
+		Worm worm = getNewTail();
+		push(worm);
+		g_map[worm.coord.y][worm.coord.x].type = eWorm;
+	}
+
 }
 
 static void keydown(int key)
@@ -121,16 +266,16 @@ static void keydown(int key)
 	switch (key)
 	{
 	case VK_LEFT:
-		g_wormHead->order = eLeft;
+		g_wormHead->worm.order = eLeft;
 		break;
 	case VK_RIGHT:
-		g_wormHead->order = eRight;
+		g_wormHead->worm.order = eRight;
 		break;
 	case VK_UP:
-		g_wormHead->order = eUp;
+		g_wormHead->worm.order = eUp;
 		break;
 	case VK_DOWN:
-		g_wormHead->order = eDown;
+		g_wormHead->worm.order = eDown;
 		break;
 	}
 
