@@ -94,6 +94,10 @@ static void CreepingWorm()
 	{
 		//꼬리를 지운다.
 		g_map[g_wormTail->worm.coord.y][g_wormTail->worm.coord.x].type = eNone;
+		if (g_wormTail->worm.coord.y == 0 || g_wormTail->worm.coord.y == g_height - 1 || g_wormTail->worm.coord.x == 0 || g_wormTail->worm.coord.x == g_width - 1)
+		{
+			g_wormTail->worm.coord.x = 1;
+		}
 		pop_back();
 
 		//머리 앞에 방향대로 새로운 몸체를 추가한다.
@@ -137,28 +141,28 @@ static Worm getNewTail()
 		
 		if (order == eLeft && g_map[y][x-1].type == eNone)
 		{
-			worm.order = eRight;
+			worm.order = eLeft;
 			worm.coord.x = x + 1;
 			worm.coord.y = y;
 			break;
 		}
 		else if (order == eRight && g_map[y][x + 1].type == eNone)
 		{
-			worm.order = eLeft;
+			worm.order = eRight;
 			worm.coord.x = x - 1;
 			worm.coord.y = y;
 			break;
 		}
 		else if (order == eUp && g_map[y-1][x].type == eNone)
 		{
-			worm.order = eDown;
+			worm.order = eUp;
 			worm.coord.x = x;
 			worm.coord.y = y+1;
 			break;
 		}
 		else if (order == eDown && g_map[y+1][x].type == eNone)
 		{
-			worm.order = eUp;
+			worm.order = eDown;
 			worm.coord.x = x;
 			worm.coord.y = y-1;
 			break;
@@ -263,6 +267,8 @@ static void AfterMove()
 
 static void Moving()
 {
+	CreepingWorm();
+
 	MapType type = checkNextStepCollisionInMap(&g_wormHead->worm);
 	if (type == eFeed)
 	{
@@ -276,7 +282,7 @@ static void Moving()
 		g_map[worm.coord.y][worm.coord.x].type = eWorm;
 	}
 
-	CreepingWorm();
+	
 }
 
 static void timer()
