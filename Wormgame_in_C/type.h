@@ -1,13 +1,24 @@
 #pragma once
 
-typedef enum Type
+typedef enum GameState
+{
+	eSuspend,
+	eBegin,
+	eOperating,
+	eWormDie,
+	eError,
+	eEnd,
+}GameState;
+
+typedef enum MapType
 {
 	eWall,
 	eFeed,
 	eWorm,
 	eRock,
+	eOutOfMap,
 	eNone,
-}Type;
+}MapType;
 
 typedef enum Order
 {
@@ -40,6 +51,6 @@ typedef struct WormNode
 
 typedef struct Map
 {
-	Type type;
+	MapType type;
 }Map;
-Map** g_map;
+

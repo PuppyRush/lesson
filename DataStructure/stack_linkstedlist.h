@@ -12,7 +12,7 @@ typedef struct WormNode
 WormNode* Top;
 
 //스택의 맨 위에 값을 추가한다.
-WormNode* push(WormNode* a, int value)
+WormNode* push_back(WormNode* a, int value)
 {
 	if (a == NULL)
 	{
@@ -57,10 +57,10 @@ WormNode* pop(WormNode* a)
 int main()
 {
 
-	push(Top, 5);
-	push(Top, 3);
-	push(Top, 4);
+	push_back(Top, 5);
+	push_back(Top, 3);
+	push_back(Top, 4);
 	pop(Top);
-	push(Top, 4);
+	push_back(Top, 4);
 
 }

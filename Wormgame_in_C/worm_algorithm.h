@@ -1,38 +1,110 @@
 #pragma once
 
-#include <limits.h>
 #include "define.h"
 #include "list.h"
 
-static const size_t INVALID_SIZE = UINT_MAX;
 
-//메인 윈도우 핸들러
-static HWND g_hwndWnd = NULL;
-static HWND g_hwndProc = NULL;
-
-//extern과 static의 차이?
-//https://dojang.io/mod/page/view.php?id=690
-static	size_t g_width = 0;
-static	size_t g_height = 0;
-
-static Coord g_feed;
-
-static Coord getRandomCoord()
+static MapType checkNextStepCollisionInMap(Worm* worm)
 {
-	Coord c;
-	c.x = ( rand() % (UNIT_WIDTH_SIZE-2))+1;
-	c.y = ( rand() % (UNIT_HEIGHT_SIZE-2))+1;
-	return c;
+	size_t y = worm->coord.y;
+	size_t x = worm->coord.x;
+
+	switch (worm->order)
+	{
+	case eLeft:
+		x -= 1;
+		break;
+	case eRight:
+		x += 1;
+		break;
+	case eDown:
+		y += 1;
+		break;
+	case eUp:
+		y -= 1;
+		break;
+	}
+
+	if (y < 0 || y >= g_height || x == 0 || x >= g_width)
+		return eOutOfMap;
+	else if (y == 0 || y == g_height - 1 || x == 0 || x == g_width - 1)
+		return eWall;
+	return g_map[y][x].type;
 }
 
-static void SetCoordInMap(Coord coord, Type t)
+static MapType checkNowCollisionInMap(Worm* worm)
 {
-	g_map[coord.y][coord.x].type = t;
+	return g_map[worm->coord.y][worm->coord.x].type;
+}
+
+static Coord getRandomFeedCoord()
+{
+	Coord c;
+	while (1)
+	{
+		c.x = ( rand() % (UNIT_WIDTH_SIZE-3))+2;
+		c.y = ( rand() % (UNIT_HEIGHT_SIZE-3))+2;
+		if (g_map[c.y][c.x].type == eNone)
+			return c;
+	}
+}
+
+static void SetCoordInMap(Worm* worm)
+{
+	switch (worm->order)
+	{
+	case eLeft:
+		worm->coord.x -= 1;
+		break;
+	case eRight:
+		worm->coord.x += 1;
+		break;
+	case eDown:
+		worm->coord.y += 1;
+		break;
+	case eUp:
+		worm->coord.y -= 1;
+		break;
+	default:
+		//error
+		break;
+	}
+	g_map[worm->coord.y][worm->coord.x].type = eWorm;
 }
 
 static BOOL compareCoord(Coord lhs, Coord rhs)
 {
 	return lhs.x == rhs.x && lhs.y == rhs.y;
+}
+
+//중간의 몸체는 움직일필요 없다. 즉, 꼬리는 사라지고 머리만 앞에 하나 추가로 생기면 전체적으로 움직인것처럼 보일것.
+static void CreepingWorm()
+{
+	if (g_wormSize == 0)
+	{
+		//error
+		return;
+	}
+
+	if (g_wormSize == 1) {
+		g_map[g_wormHead->worm.coord.y][g_wormHead->worm.coord.x].type = eNone;
+		SetCoordInMap(&g_wormHead->worm);
+	}
+	else
+	{
+		//꼬리를 지운다.
+		g_map[g_wormTail->worm.coord.y][g_wormTail->worm.coord.x].type = eNone;
+		pop_back();
+
+		//머리 앞에 방향대로 새로운 몸체를 추가한다.
+		WormNode* old_head = g_wormHead;
+		Worm new_worm;
+		new_worm.order = old_head->worm.order;
+		new_worm.coord = old_head->worm.coord;
+		SetCoordInMap(&new_worm);
+
+		push_front(new_worm);
+	}
 }
 
 static Worm getNewTail()
@@ -98,6 +170,7 @@ static Worm getNewTail()
 
 static void init_game()
 {
+
 	srand((unsigned int)time(NULL));
 
 	g_width = UNIT_WIDTH_SIZE;
@@ -155,110 +228,70 @@ static void init_game()
 	w = g_width / 2;
 	g_map[h][w].type = eWorm;
 
-	g_wormTail = g_wormHead = (Worm*)malloc(sizeof(Worm));
-	g_wormHead->worm.coord.x = w;
-	g_wormHead->worm.coord.y = h;
-	g_wormHead->worm.order = eLeft;
-	g_wormHead->prev = NULL;
-	g_wormHead->next = NULL;
+	Worm worm;
+	worm.coord.x = w;
+	worm.coord.y = h;
+	worm.order = eLeft;
+	push_front(worm);
 
-	g_feed = getRandomCoord();
+	g_feed = getRandomFeedCoord();
 	g_map[g_feed.y][g_feed.x].type = eFeed;
+
 }
 
-static void timer()
+static GameState BeforeMove()
 {
-	g_map[g_wormHead->worm.coord.y][g_wormHead->worm.coord.x].type = eNone;
-	switch (g_wormHead->worm.order)
+	MapType type = checkNextStepCollisionInMap(&g_wormHead->worm);
+	switch (type)
 	{
-	case eLeft:
-		if (g_wormHead->worm.coord.x == 0 )
-		{
-		}
-		else
-		{
-			g_map[g_wormHead->worm.coord.y][g_wormHead->worm.coord.x - 1].type = eWorm;
-			g_wormHead->worm.coord.x -= 1;
-		}
-
-		break;
-	case eRight:
-		if (g_wormHead->worm.coord.x == g_width - 1 )
-		{
-		}
-		else
-		{
-			g_map[g_wormHead->worm.coord.y][g_wormHead->worm.coord.x + 1].type = eWorm;
-			g_wormHead->worm.coord.x += 1;
-		}
-
-		break;
-	case eDown:
-		if (g_wormHead->worm.coord.y == g_height - 1)
-		{
-		}
-		else
-		{
-			g_map[g_wormHead->worm.coord.y + 1][g_wormHead->worm.coord.x].type = eWorm;
-			g_wormHead->worm.coord.y += 1;
-		}
-
-		break;
-	case eUp:
-		if (g_wormHead->worm.coord.x == 0 )
-		{
-		}
-		else
-		{
-			g_map[g_wormHead->worm.coord.y - 1][g_wormHead->worm.coord.x].type = eWorm;
-			g_wormHead->worm.coord.y -= 1;
-		}
-
-		break;
+	case eWall:
+	case eOutOfMap:
+	case eRock:
+	case eWorm:
+		return eWormDie;
+	case eFeed:
+	case eNone:
+		return eOperating;
 	default:
-		break;
+		return eError;
 	}
+}
 
-	WormNode* node = g_wormTail;
-	while (node != NULL && node->prev != NULL)
+static void AfterMove()
+{
+}
+
+static void Moving()
+{
+	MapType type = checkNextStepCollisionInMap(&g_wormHead->worm);
+	if (type == eFeed)
 	{
-		g_map[node->worm.coord.y][node->worm.coord.x].type = eNone;
-		if (node->worm.order == eLeft)
-		{
-			node->worm.coord.x -= 1;
-			g_map[node->worm.coord.y][node->worm.coord.x-1].type = eWorm;
-		}
-		else if (node->worm.order == eRight)
-		{
-			node->worm.coord.x += 1;
-			g_map[node->worm.coord.y][node->worm.coord.x + 1].type = eWorm;
-		}
-		else if (node->worm.order == eDown)
-		{
-			node->worm.coord.y += 1;
-			g_map[node->worm.coord.y+1][node->worm.coord.x].type = eWorm;
-		}
-		else if (node->worm.order == eUp)
-		{
-			node->worm.coord.y -= 1;
-			g_map[node->worm.coord.y-1][node->worm.coord.x].type = eWorm;
-		}
-
-		node = node->prev;
-	}
-
-	if (compareCoord(g_wormTail->worm.coord, g_feed))
-	{
-
-		//g_map[g_feed.y][g_feed.x].type = eNone;
-		g_feed = getRandomCoord();
+		//먹이 위치 재조정
+		g_map[g_feed.y][g_feed.x].type = eNone;
+		g_feed = getRandomFeedCoord();
 		g_map[g_feed.y][g_feed.x].type = eFeed;
 
 		Worm worm = getNewTail();
-		push(worm);
+		push_back(worm);
 		g_map[worm.coord.y][worm.coord.x].type = eWorm;
 	}
 
+	CreepingWorm();
+}
+
+static void timer()
+{	
+	GameState type = BeforeMove();
+	
+	if (type == eOperating)
+	{
+		Moving();
+		AfterMove();
+	}
+	else if (type == eWormDie || type == eError)
+	{
+
+	}
 }
 
 static void keydown(int key)

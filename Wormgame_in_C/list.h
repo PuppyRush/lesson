@@ -1,16 +1,37 @@
 #pragma once
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "global.h"
 
-#include "data.h"
 
-//지렁이 자료구조를 위한 변수
-static WormNode* g_wormHead = NULL;
-static WormNode* g_wormTail = NULL;
+
+//큐의 맨 앞 노드에 새로운 노드를 추가하고 그 노드를 반환합니다.
+WormNode* push_front(Worm worm)
+{
+	if (g_wormHead == NULL)
+	{
+		g_wormHead = (WormNode*)malloc(sizeof(WormNode));
+		g_wormHead->worm = worm;
+		g_wormHead->next = g_wormTail;
+		g_wormHead->prev = NULL;
+		g_wormTail = g_wormHead;
+		g_wormSize = 1;
+		return g_wormTail;
+	}
+	else
+	{
+		WormNode* new_node = (WormNode*)malloc(sizeof(WormNode));
+		new_node->worm = worm;
+		new_node->next = g_wormHead;
+		new_node->prev = NULL;
+		g_wormHead->prev = new_node;
+		g_wormHead = new_node;
+		g_wormSize++;
+		return g_wormTail;
+	}
+}
 
 //큐의 맨 마지막 노드에 새로운 노드를 추가하고 그 노드를 반환합니다.
-WormNode* push(Worm worm)
+WormNode* push_back(Worm worm)
 {
 	if (g_wormTail == NULL)
 	{
@@ -19,6 +40,7 @@ WormNode* push(Worm worm)
 		g_wormHead->next = g_wormTail;
 		g_wormHead->prev = NULL;
 		g_wormTail = g_wormHead;
+		g_wormSize = 1;
 		return g_wormTail;
 	}
 	else
@@ -29,15 +51,56 @@ WormNode* push(Worm worm)
 		new_node->prev = g_wormTail;
 		g_wormTail->next = new_node;
 		g_wormTail = new_node;
+		g_wormSize++;
 		return g_wormTail;
 	}
 }
 
-//큐의 맨 앞 노드를 반환합니다.
-WormNode* pop()
+
+//리스트의 맨 뒤를 제거합니다.
+WormNode* pop_back()
 {
-	return g_wormHead;
+	if (g_wormHead == NULL)
+	{
+
+	}
+	else if (g_wormHead == g_wormTail)
+	{
+		free(g_wormHead);
+		g_wormSize = 0;
+	}
+	else
+	{
+		WormNode* old_tail = g_wormTail;
+		g_wormTail->prev->next = NULL;
+		g_wormTail = g_wormTail->prev;
+		free(old_tail);
+		g_wormSize--;
+	}
 }
+
+//리스트의 맨 앞을 제거합니다.
+WormNode* pop_front()
+{
+	if (g_wormHead == NULL)
+	{
+
+	}
+	else if (g_wormHead == g_wormTail)
+	{
+		free(g_wormHead);
+		g_wormSize = 0;
+	}
+	else
+	{
+		WormNode* old_head = g_wormHead;
+		g_wormHead->next->prev = NULL;
+		g_wormHead = g_wormHead->next;
+		free(old_head);
+		g_wormSize--;
+	}
+}
+
 
 //스택의 모든 노드들을 없앱니다.
 void clear()
@@ -48,6 +111,7 @@ void clear()
 		free(free_Node);
 		free_Node = free_Node->next;
 	}
+	g_wormSize = 0;
 }
 
 //큐의 맨 앞의 노드 값을 보여줍니다.
@@ -84,6 +148,7 @@ WormNode* remove_(Worm worm)
 				search->prev->next = search->next;
 			}
 			free(search);
+			g_wormSize--;
 			break;
 		}
 		search = search->next;

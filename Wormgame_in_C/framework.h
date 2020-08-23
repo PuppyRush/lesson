@@ -13,3 +13,8 @@
 #include <malloc.h>
 #include <memory.h>
 #include <tchar.h>
+
+#include <time.h>
+#include <limits.h>
+#include <stdio.h>
+#include <stdlib.h>

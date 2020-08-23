@@ -1,10 +1,11 @@
 ﻿// WormGame.cpp : 애플리케이션에 대한 진입점을 정의합니다.
 //
 
-#include <time.h>
+
 #include "framework.h"
 #include "Wormgame_in_C.h"
-#include "worm.h"
+#include "worm_algorithm.h"
+#include "global.h"
 
 #define MAX_LOADSTRING 100
 
@@ -232,7 +233,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         //Timer 지정
         //Timer를 이용하여 주기적으로 처리해야할 일을 수행한다.
         //http://www.tipssoft.com/bulletin/board.php?bo_table=FAQ&wr_id=2192
-        SetTimer(hWnd, 0, 500, 0);
+        SetTimer(hWnd, 0, 200, 0);
 
         break;
     }

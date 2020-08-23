@@ -27,16 +27,19 @@
     <ClInclude Include="Wormgame_in_C.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="worm.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="data.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="define.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="list.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="global.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="type.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="worm_algorithm.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

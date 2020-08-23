@@ -5,7 +5,7 @@
 
 
 //스택의 맨 위에 값을 추가한다.
-void push(int* ary, int value);
+void push_back(int* ary, int value);
 
 //스택의 맨 위를 제거한다.
 int pop();
@@ -22,12 +22,12 @@ int main()
 {
 	int array[1000];
 
-	push(array, 5);
-	push(array, 3);
-	push(array, 4);
+	push_back(array, 5);
+	push_back(array, 3);
+	push_back(array, 4);
 	pop();
 
-	push(array, 4);
+	push_back(array, 4);
 	top();
 
 	clear();

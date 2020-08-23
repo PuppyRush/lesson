@@ -16,7 +16,7 @@ WormNode* head = NULL;
 WormNode* tail = NULL;
 
 //큐의 맨 마지막 노드에 새로운 노드를 추가하고 그 노드를 반환합니다.
-WormNode* push(int value);
+WormNode* push_back(int value);
 
 //큐의 맨 앞 노드를 반환합니다.
 WormNode* pop();
@@ -44,18 +44,18 @@ WormNode* find(int value);
 int main()
 {
 
-	push(3);
-	push(5);
-	push(15);
-	push(32);
-	push(5);
-	push(6);
-	push(5125);
+	push_back(3);
+	push_back(5);
+	push_back(15);
+	push_back(32);
+	push_back(5);
+	push_back(6);
+	push_back(5125);
 	pop();
 	remove(5);
 	remove(3);
 	WormNode* node1 = remove(6);
-	push(3);
+	push_back(3);
 	insert(find(6), node1);
 	replace(5125, remove(32));
 
