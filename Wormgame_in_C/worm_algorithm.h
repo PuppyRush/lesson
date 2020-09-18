@@ -42,8 +42,8 @@ static Coord getRandomFeedCoord()
 	Coord c;
 	while (1)
 	{
-		c.x = ( rand() % (UNIT_WIDTH_SIZE-3))+2;
-		c.y = ( rand() % (UNIT_HEIGHT_SIZE-3))+2;
+		c.x = ( rand() % (UNIT_WIDTH_SIZE-4))+2;
+		c.y = ( rand() % (UNIT_HEIGHT_SIZE-4))+2;
 		if (g_map[c.y][c.x].type == eNone)
 			return c;
 	}
@@ -92,15 +92,15 @@ static void CreepingWorm()
 	}
 	else
 	{
-		//꼬리를 지운다.
+		//좌표에서 꼬리부분을 없애고 worm 리스트에서도 tail을 pop한다.
 		g_map[g_wormTail->worm.coord.y][g_wormTail->worm.coord.x].type = eNone;
-		if (g_wormTail->worm.coord.y == 0 || g_wormTail->worm.coord.y == g_height - 1 || g_wormTail->worm.coord.x == 0 || g_wormTail->worm.coord.x == g_width - 1)
-		{
-			g_wormTail->worm.coord.x = 1;
-		}
+		//if (g_wormTail->worm.coord.y == 0 || g_wormTail->worm.coord.y == g_height - 1 || g_wormTail->worm.coord.x == 0 || g_wormTail->worm.coord.x == g_width - 1)
+		//{
+		//	g_wormTail->worm.coord.x = 1;
+		//}
 		pop_back();
 
-		//머리 앞에 방향대로 새로운 몸체를 추가한다.
+		//현재 머리 앞에 현재 설정된 방향대로 새로운 머리를 추가한다.
 		WormNode* old_head = g_wormHead;
 		Worm new_worm;
 		new_worm.order = old_head->worm.order;
@@ -125,6 +125,7 @@ static Worm getNewTail()
 	}
 	
 	//shuffle - 순서를 섞는다.
+	//더 자연스러운 방법은 tail로부터 tail-1 번째 몸체 방향을 찾아 그 반대 방향에 추가해주면 자연스럽다.
 	int rnd[eOrder] = { eLeft, eRight, eDown, eUp };
 	for (int i = 0; i < 5; i++)
 	{
@@ -243,6 +244,7 @@ static void init_game()
 
 }
 
+//움직이기전 지렁이 상태를 검사한다.
 static GameState BeforeMove()
 {
 	MapType type = checkNextStepCollisionInMap(&g_wormHead->worm);
@@ -261,10 +263,12 @@ static GameState BeforeMove()
 	}
 }
 
+//움직임이 모두 끝나면 이후 동작을 처리한다.
 static void AfterMove()
 {
 }
 
+//움직임과 그에 따른 먹이를 처리한다.
 static void Moving()
 {
 	CreepingWorm();
@@ -272,14 +276,15 @@ static void Moving()
 	MapType type = checkNextStepCollisionInMap(&g_wormHead->worm);
 	if (type == eFeed)
 	{
+		Worm worm = getNewTail();
+		push_back(worm);
+		g_map[worm.coord.y][worm.coord.x].type = eWorm;
+
 		//먹이 위치 재조정
 		g_map[g_feed.y][g_feed.x].type = eNone;
 		g_feed = getRandomFeedCoord();
 		g_map[g_feed.y][g_feed.x].type = eFeed;
 
-		Worm worm = getNewTail();
-		push_back(worm);
-		g_map[worm.coord.y][worm.coord.x].type = eWorm;
 	}
 
 	
@@ -294,6 +299,7 @@ static void timer()
 		Moving();
 		AfterMove();
 	}
+	//게임이 끝나거나 에러 발생시 다음에서 처리한다.
 	else if (type == eWormDie || type == eError)
 	{
 
